@@ -13,5 +13,27 @@ public class bookmain{
 		System.out.print("메뉴 입력:");
 		menu = scan.nextInt();
 
+		switch(menu){
+		case 1:
+			login();
+			break;
+		case 2:
+			join();
+			break;
+		case 3:
+			the_end();
+			break;
+		}
+		
+	}
+	public static void login(){
+	}
+	public static void join(){
+	}
+	public static void the_end(){
 	}
 }
+
+
+
+
