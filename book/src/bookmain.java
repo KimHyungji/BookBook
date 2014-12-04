@@ -2,14 +2,10 @@ import java.util.Scanner;
 
 public class bookmain{
 	Scanner scan = new Scanner(System.in);
-
-	
 	
 	public static void main(String[] args){
 		bookmain  a = new bookmain();
 		a.show_menu();
-
-		
 	}
 	
 	public void show_menu(){
