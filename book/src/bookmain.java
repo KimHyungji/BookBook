@@ -4,6 +4,7 @@ public class bookmain{
 	public static void main(String[] args){
 		int menu;
 		Scanner scan = new Scanner(System.in);
+		bookmain  a = new bookmain();
 
 		System.out.println("------------------------------");
 		System.out.println("1. ·Î±×ÀÎ");
@@ -15,22 +16,22 @@ public class bookmain{
 
 		switch(menu){
 		case 1:
-			login();
+			a.login();
 			break;
 		case 2:
-			join();
+			a.join();
 			break;
 		case 3:
-			the_end();
+			a.the_end();
 			break;
 		}
 		
 	}
-	public static void login(){
+	public void login(){
 	}
-	public static void join(){
+	public void join(){
 	}
-	public static void the_end(){
+	public void the_end(){
 	}
 }
 
