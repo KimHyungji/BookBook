@@ -1,11 +1,19 @@
 import java.util.Scanner;
 
 public class bookmain{
-	public static void main(String[] args){
-		int menu;
-		Scanner scan = new Scanner(System.in);
-		bookmain  a = new bookmain();
+	Scanner scan = new Scanner(System.in);
 
+	
+	
+	public static void main(String[] args){
+		bookmain  a = new bookmain();
+		a.show_menu();
+
+		
+	}
+	
+	public void show_menu(){
+		int menu;
 		System.out.println("------------------------------");
 		System.out.println("1. 로그인");
 		System.out.println("2. 회원가입");
@@ -13,19 +21,18 @@ public class bookmain{
 		System.out.println("------------------------------");
 		System.out.print("메뉴 입력:");
 		menu = scan.nextInt();
-
+		
 		switch(menu){
 		case 1:
-			a.login();
+			login();
 			break;
 		case 2:
-			a.join();
+			join();
 			break;
 		case 3:
-			a.the_end();
+			the_end();
 			break;
 		}
-		
 	}
 	public void login(){
 	}
