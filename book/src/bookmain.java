@@ -33,31 +33,33 @@ public class bookmain{
 
 	public static void main(String[] args) throws Exception{
 
-		int menu;
-		Scanner scan1 = new Scanner(System.in);
-		bookmain  a = new bookmain();
-
-		System.out.println("------------------------------");
-		System.out.println("1. 로그인");
-		System.out.println("2. 회원가입");
-		System.out.println("3. 종료");
-		System.out.println("------------------------------");
-		System.out.print("메뉴 입력:");
-		menu = scan1.nextInt();
-
-		switch(menu){
-		case 1:
-			a.login();//로그인
-			break;
-		case 2:
-			a.join();//회원가입
-			break;
-		case 3:
-			a.the_end();//종료
-			break;
-		}
-
+			Scanner scan = new Scanner(System.in);
+			bookmain start = new bookmain();
+			start.show_menu();
 	}
+		
+		public void show_menu() throws Exception{
+			int menu;
+			System.out.println("------------------------------");
+			System.out.println("1. 로그인");
+			System.out.println("2. 회원가입");
+			System.out.println("3. 종료");
+			System.out.println("------------------------------");
+			System.out.print("메뉴 입력:");
+			menu = scan.nextInt();
+
+			switch(menu){
+			case 1:
+				login();
+				break;
+			case 2:
+				join();
+				break;
+			case 3:
+				the_end();
+				break;
+			}
+		}
 	
 	public void login(){
 		System.out.println("[아이디 입력]");
