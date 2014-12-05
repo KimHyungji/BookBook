@@ -1,6 +1,9 @@
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 class Member{
@@ -12,9 +15,18 @@ class Member{
 	public void setID(int newID){
 		ID = newID;
 	}
+	public void setpassword(String newpassword){
+		password = newpassword;
+	}
+	public void setname(String newname){
+		name = newname;
+	}
+	public void setmajor(String newmajor){
+		major = newmajor;
+	}
 	
 	public int getequal(int newID) throws Exception{
-		ObjectInputStream osi = new ObjectInputStream(new FileInputStream("tmp.txt"));
+		ObjectInputStream osi = new ObjectInputStream(new FileInputStream("tmp.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
 		//i = osi.readInt();
 		for(int j = 0; osi.readObject() != null; j++){
 			Member ms = (Member)osi.readObject();
@@ -24,6 +36,13 @@ class Member{
 		return -1;
 	}
 	
+	public void addmem(Object inputobjec) throws IOException{
+		
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("tmp.txt"));
+		oos.writeObject(inputobjec);
+		oos.close();
+		System.out.println("회원가입 완료!");
+	}
 }
 
 public class bookmain{
@@ -81,7 +100,8 @@ public class bookmain{
 
 		Member newmem = new Member();
 		scan.nextLine();  // 자바 Scanner의 문제로 불필요한 개행문자를 제거하기 위해 임시로 넣은 코드임
-		int newID;
+		int newID,inputcomplete=0;
+		do{
 		System.out.print("아이디(학번):");
 		newID = scan.nextInt();
 		if(newmem.getequal(newID)==1){
@@ -90,29 +110,63 @@ public class bookmain{
 		else{
 			System.out.println("존재하지 않는 아이디입니다.");
 			newmem.setID(newID);
+			inputcomplete =1;
 		}
+		}while(inputcomplete ==0);
+		
 		//아이디는 학색의 학번으로 숫자 7자리를 사용한다.
 		//아이디가 이미 존재한다면 아이디라면 ‘이미 사용하고 있는 아이디입니다.’ 메시지 출력
+		inputcomplete = 0;
+		do{
 		System.out.print("비밀번호:");
-		String password = scan.nextLine();
+		String newpassword = scan.nextLine();
 		//비밀먼호는 문자,숫자,기호 제한X
 		//8자리 이상 입력해야한다.
+		if(newpassword.length() < 8)
+			System.out.println("8자 이상의 패스워드를 입력해주세요.");
 		//사용자가 패스워드에 8자 미만을 입력하였다면 ‘8자 이상의 패스워드를 입력해주세요.’ 메시지 출력
 		System.out.print("비밀번호 확인:");
-		password = scan.nextLine();
+		String againpassword = scan.nextLine();
 		//패스워드를 2번 입력받아 두 내용이 일치하는지 확인한다.
+		if(againpassword.equals(newpassword)){
+			newmem.setpassword(newpassword);
+			inputcomplete = 1;
+		}
+		else
+			System.out.println("패스워드가 일치하지 않습니다. 다시 확인하고 입력해주세요.");
+		}while(inputcomplete ==0);
 		//두 내용이 일치하지 않을 경우 않는다면 ‘패스워드가 일치하지 않습니다. 다시 확인하고 입력해주세요.’ 메시지 출력
+		inputcomplete = 0;
+		do{
 		System.out.print("이름:");
-		String name = scan.nextLine();
+		String newname = scan.nextLine();
 		//이름 입력은 두 자 이상이어야 한다.
+		if(newname.length() < 2)
+			System.out.println("두 글자 이상 입력해주세요.");
+		else{
+			newmem.setname(newname);
+			inputcomplete = 1;
+		}
+		}while(inputcomplete == 0);
 		//두 글자 미만으로 입력되었을 경우, ‘두 글자 이상 입력해주세요.’
+		inputcomplete = 0;
+		do{
 		System.out.print("학과:");
-		String major = scan.nextLine();
+		String newmajor = scan.nextLine();
 		//학과 입력은 두 자 이상이어야 한다.
 		//두 글자 미만으로 입력되었을 경우, ‘두 글자 이상 입력해주세요.’
+		if(newmajor.length() < 2)
+			System.out.println("두 글자 이상 입력해주세요.");
+		else{
+			newmem.setmajor(newmajor);
+			inputcomplete =1;
+		}
+		}while(inputcomplete == 0);
 		
 		//회원가입에 성공할 시 '회원 가입 완료'메시지 출력
+		newmem.addmem(this);
 		//메시지 출력과 동시에 로그인 화면으로 간다.
+		login();
 	
 	}
 	public void the_end(){
