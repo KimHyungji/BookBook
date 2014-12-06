@@ -117,14 +117,20 @@ public class bookmain{
 		//아이디는 학색의 학번으로 숫자 7자리를 사용한다.
 		//아이디가 이미 존재한다면 아이디라면 ‘이미 사용하고 있는 아이디입니다.’ 메시지 출력
 		inputcomplete = 0;
+		String newpassword;
 		do{
 		System.out.print("비밀번호:");
-		String newpassword = scan.nextLine();
+		newpassword = scan.nextLine();
 		//비밀먼호는 문자,숫자,기호 제한X
 		//8자리 이상 입력해야한다.
 		if(newpassword.length() < 8)
 			System.out.println("8자 이상의 패스워드를 입력해주세요.");
+		else
+			inputcomplete = 1;
 		//사용자가 패스워드에 8자 미만을 입력하였다면 ‘8자 이상의 패스워드를 입력해주세요.’ 메시지 출력
+		}while(inputcomplete == 0);
+		
+		do{
 		System.out.print("비밀번호 확인:");
 		String againpassword = scan.nextLine();
 		//패스워드를 2번 입력받아 두 내용이 일치하는지 확인한다.
