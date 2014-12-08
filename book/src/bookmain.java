@@ -1,16 +1,15 @@
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.util.Iterator;
 import java.util.Scanner;
+import java.io.*;
 
-class Member{
-	private int ID;
-	private String password;
-	private String name;
-	private String major;
+class Member implements Serializable{
+	
+	public int ID;
+	public String password;
+	public String name;
+	public String major;
 	
 	public void setID(int newID){
 		ID = newID;
@@ -26,20 +25,25 @@ class Member{
 	}
 	
 	public int getequal(int newID) throws Exception{
-		ObjectInputStream osi = new ObjectInputStream(new FileInputStream("tmp.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
+		
+		try{
+			ObjectInputStream osi = new ObjectInputStream(new FileInputStream("tmp.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
 		//i = osi.readInt();
-		for(int j = 0; osi.readObject() != null; j++){
+		while(osi.readObject() != null){
 			Member ms = (Member)osi.readObject();
 			if(newID == ms.ID)
 				return 1;
 		}
+		}catch(Exception e){
+			return -1;
+		}
 		return -1;
 	}
 	
-	public void addmem(Object inputobjec) throws IOException{
+	public void addmem() throws IOException{
 		
-		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("tmp.txt"));
-		oos.writeObject(inputobjec);
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("tmp.txt",true));
+		oos.writeObject(this);
 		oos.close();
 		System.out.println("회원가입 완료!");
 	}
@@ -49,7 +53,7 @@ public class bookmain{
 	//Member[] bc = new Member[10];
 	Scanner scan = new Scanner(System.in);
 	int i=0;
-
+  
 	public static void main(String[] args) throws Exception{
 
 			Scanner scan = new Scanner(System.in);
@@ -120,6 +124,7 @@ public class bookmain{
 		String newpassword;
 		do{
 		System.out.print("비밀번호:");
+		scan.nextLine();
 		newpassword = scan.nextLine();
 		//비밀먼호는 문자,숫자,기호 제한X
 		//8자리 이상 입력해야한다.
@@ -170,9 +175,27 @@ public class bookmain{
 		}while(inputcomplete == 0);
 		
 		//회원가입에 성공할 시 '회원 가입 완료'메시지 출력
-		newmem.addmem(this);
+		newmem.addmem();
 		//메시지 출력과 동시에 로그인 화면으로 간다.
 		login();
+		
+		/*try{
+			ObjectInputStream oss = new ObjectInputStream(new FileInputStream("tmp.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
+		//i = osi.readInt();
+				//while(true){
+			Member ms = (Member)oss.readObject();
+			System.out.println(ms.ID);
+			Member m2 = (Member)oss.readObject();
+			System.out.println(m2.ID);
+			Member m3 = (Member)oss.readObject();
+			System.out.println(m3.ID);
+		//}
+		
+		}catch(StreamCorruptedException e){
+			e.printStackTrace();
+		}*/
+		
+		
 	
 	}
 	public void the_end(){
