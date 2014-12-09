@@ -99,7 +99,7 @@ public class bookmain{
 		//다시 로그인 화면
 
 		//로그인에 성공하였을 경우 ‘로그인 되었습니다.’라는 메시지를 출력
-		//사서 메뉴 출력 또는 학생 메뉴 출력 
+	//사서 메뉴 출력 또는 학생 메뉴 출력 
 	}
 	
 	public void join() throws Exception{
@@ -182,23 +182,6 @@ public class bookmain{
 		newmem.addmem();
 		//메시지 출력과 동시에 로그인 화면으로 간다.
 		login();
-		
-		/*try{
-			ObjectInputStream oss = new ObjectInputStream(new FileInputStream("tmp.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
-		//i = osi.readInt();
-				//while(true){
-			Member ms = (Member)oss.readObject();
-			System.out.println(ms.ID);
-			Member m2 = (Member)oss.readObject();
-			System.out.println(m2.ID);
-			Member m3 = (Member)oss.readObject();
-			System.out.println(m3.ID);
-		//}
-		
-		}catch(StreamCorruptedException e){
-			e.printStackTrace();
-		}*/
-		
 		
 	
 	}
