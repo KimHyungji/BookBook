@@ -199,6 +199,7 @@ public class bookmain{
 	
 	}
 	public void the_end(){
+		exit(1);
 		//더 이상의 메뉴를 출력시키지 않는다.
 		
 	}
