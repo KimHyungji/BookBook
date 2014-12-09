@@ -86,10 +86,14 @@ public class bookmain{
 	
 	public void login(){
 		System.out.println("[아이디 입력]");
+		String id = scan.nextLine();
+
 		//회원 정보 명단에 존재하는 아이디와 비교
 		//입력한 아이디가 존재하지 않는다면 ‘존재하지 않는 아이디입니다.’출력
 	    //다시 로그인 화면
 		System.out.println("[비밀번호 입력]");
+		String password = scan.nextLine();
+
 		///회원 정보 명단에 존재하는 아이디,패스워드와 비교
 		//입력한 아이디에 해당하는 패스워드가 불일치하면 경우 ‘로그인에 실패하였습니다. 아이디와 패스워드를 다시 입력해주세요.’메시지 출력
 		//다시 로그인 화면
