@@ -84,23 +84,31 @@ public class bookmain{
 			}
 		}
 	
-	public void login(){
-		System.out.println("[아이디 입력]");
-		String id = scan.nextLine();
+		public void login() throws Exception{
+			Member loginmem = new Member();
+			int loginputcomplete =0;
+			do{
+				System.out.println("[아이디 입력]");
+				int id = scan.nextInt();
+				if(loginmem.getequal(id)==-1){
+					System.out.println("존재하지 않는 아이디입니다.");
+					loginputcomplete = 1;
+				}else
+					loginputcomplete = 0;
+			}while(loginputcomplete ==1);
+			//회원 정보 명단에 존재하는 아이디와 비교
+			//입력한 아이디가 존재하지 않는다면 ‘존재하지 않는 아이디입니다.’출력
+			//다시 로그인 화면
+			System.out.println("[비밀번호 입력]");
+			String password = scan.nextLine();
 
-		//회원 정보 명단에 존재하는 아이디와 비교
-		//입력한 아이디가 존재하지 않는다면 ‘존재하지 않는 아이디입니다.’출력
-	    //다시 로그인 화면
-		System.out.println("[비밀번호 입력]");
-		String password = scan.nextLine();
+			///회원 정보 명단에 존재하는 아이디,패스워드와 비교
+			//입력한 아이디에 해당하는 패스워드가 불일치하면 경우 ‘로그인에 실패하였습니다. 아이디와 패스워드를 다시 입력해주세요.’메시지 출력
+			//다시 로그인 화면
 
-		///회원 정보 명단에 존재하는 아이디,패스워드와 비교
-		//입력한 아이디에 해당하는 패스워드가 불일치하면 경우 ‘로그인에 실패하였습니다. 아이디와 패스워드를 다시 입력해주세요.’메시지 출력
-		//다시 로그인 화면
-
-		//로그인에 성공하였을 경우 ‘로그인 되었습니다.’라는 메시지를 출력
-	//사서 메뉴 출력 또는 학생 메뉴 출력 
-	}
+			//로그인에 성공하였을 경우 ‘로그인 되었습니다.’라는 메시지를 출력
+			//사서 메뉴 출력 또는 학생 메뉴 출력 
+		}
 	
 	public void join() throws Exception{
 
@@ -186,7 +194,7 @@ public class bookmain{
 	
 	}
 	public void the_end(){
-		exit(1);
+		System.exit(-1);
 		//더 이상의 메뉴를 출력시키지 않는다.
 		
 	}
