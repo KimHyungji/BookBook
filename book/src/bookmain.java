@@ -149,6 +149,18 @@ class Book implements Serializable{
 }
 
 public class bookmain{
+	String newname;
+	String newauthor;
+	String newpublish;
+	String newborrower;
+	public Vector<Object> getall() { // 제네릭 설정
+		Vector<Object> myvector = new Vector<Object>();
+		myvector.add(newname);
+		myvector.add(newauthor);
+		myvector.add(newborrower);
+		return myvector;
+	}
+	
 	//Member[] bc = new Member[10];
 	Scanner scan = new Scanner(System.in);
 	int i=0;
@@ -230,21 +242,22 @@ public class bookmain{
 
 	}
 	
-		//회원가입
+	//회원가입
 	public void join() throws Exception{
 		System.out.println("[회원가입 정보 입력]");
-
+		
 		Member newmem = new Member();
 		scan.nextLine();  // 자바 Scanner의 문제로 불필요한 개행문자를 제거하기 위해 임시로 넣은 코드임
 		int newID,inputcomplete=0;
 		do{
-			System.out.print("아이디(학번):");
+			System.out.println("***********************************");
+			System.out.print("학생 아이디(학번):");
 			newID = scan.nextInt();
 		if(newmem.getequal(newID)==1){
 			System.out.println("이미 사용중인 아이디입니다.");
 		}
 		else{
-			System.out.println("존재하지 않는 아이디입니다.");
+			System.out.println("사용할수 있는 아이디입니다.");
 			newmem.setID(newID);
 			inputcomplete =1;
 		}
@@ -255,10 +268,10 @@ public class bookmain{
 		inputcomplete = 0;
 		String newpassword;
 		do{
-			System.out.print("비밀번호:");
+			System.out.print("패스워드:");
 			scan.nextLine();
 			newpassword = scan.nextLine();
-		//비밀먼호는 문자,숫자,기호 제한X
+			//비밀먼호는 문자,숫자,기호 제한X
 			//사용자가 패스워드에 8자 미만을 입력하였다면 
 			if(newpassword.length() < 8)
 			//‘8자 이상의 패스워드를 입력해주세요.’ 메시지 출력
@@ -269,7 +282,7 @@ public class bookmain{
 		
 		do{
 			//패스워드를 2번 입력받아 두 내용이 일치하는지 확인한다.
-			System.out.print("비밀번호 확인:");
+			System.out.print("패스워드 확인:");
 			String againpassword = scan.nextLine();
 			
 			if(againpassword.equals(newpassword)){
@@ -309,76 +322,22 @@ public class bookmain{
 				inputcomplete =1;
 			}
 			}while(inputcomplete == 0);
+		
 		//회원가입에 성공할 시 '회원 가입 완료'메시지 출력
 		System.out.println("회원가입 완료!");
+		System.out.println("***********************************");
 		
-		//collection.addmem(newmem);
-		//collection.add(mem);
-		//memberCount++;
-		//메시지 출력과 동시에 로그인 화면으로 간다.
+		System.out.println("로그인");
 		login();
 		
 		}
-		//종료
+	
+	//종료
 	public void the_end(){
 		System.exit(-1);
 		//더 이상의 메뉴를 출력시키지 않는다.
 		
 		}
-	
-	//학생의 메뉴
-	public void student_menu() throws Exception{
-		int stu_menu;
-		System.out.println("------------------------------");
-		System.out.println("1. 도서 검색");
-		System.out.println("2. 나의 대여 정보");
-		System.out.println("3. 로그아웃");
-		System.out.println("------------------------------");
-		System.out.print("메뉴 입력:");
-		stu_menu = scan.nextInt();
-
-		switch(stu_menu){
-		case 1:
-			book_search();
-			break;
-		case 2:
-			book_borrowinfo();
-			break;
-		case 3:
-			stu_logout();
-			break;
-		}
-		
-	}
-	//도서검색
-	public void book_search() throws Exception{
-		System.out.println("도서의 제목을 입력하세요.");
-		scan.nextLine(); 
-		
-		//도서 정보 명단에 있는 도서들의 제목과 비교
-		//입력한 단어가 포함된 모든 도서의 정보를 출력
-		System.out.println("검색한 단어를 포함한 모든 도서가 검색되었습니다.");
-		
-		//검색 단어를 입력하지 않고 Enter키 누르는 경우
-		//검색어를 입력하지 않았습니다. 다시 입력해주십시오. 메시지 출력
-		//도서 검색결과 없는경우
-		//검색어와 일치하는 결과가 없습니다. 메시지 출력
-	}
-	//대여목록
-	public void book_borrowinfo() throws Exception{
-		//도서 정보 명단의 대여자 중, 자신의 계정 아이디와 일치하는 도서들의 항목들을 출력시킨다.
-		//나의 도서대여 목록이 존재하지 않는다면 
-		//대여 중인 도서가 없습니다.메시지 출력
-	}
-	//로그아웃
-	public void stu_logout() throws Exception{
-		//로그아웃 하시겠습니까?(Y/N) 메시지 출력
-		//N이면 (로그인/회원가입/종료) 화면
-		//Y이면 사서는 사서의 메뉴로 학생은 학생의 메뉴로
-		
-		//로그아웃을 하지 않고 프로그램을 강제로 끄게 되는 경우
-		//해당 계정이 변경한 내용이 자동으로 저장되며 로그아웃된다.
-	}
 	
 	//사서의 메뉴
 	public void librarian_menu() throws Exception{
@@ -410,13 +369,13 @@ public class bookmain{
 	//도서등록
 	public void book_register() throws Exception{
 
-		System.out.println("[새로운 도서 정보 입력]");
-
+		System.out.println("[도서 정보 입력]");
 		Book newbook = new Book();
 		scan.nextLine();  
 		String newtitle;
 		int inputcomplete2=0;
 		do{
+			System.out.println("***********************************");
 			System.out.print("제목:");
 			newtitle = scan.nextLine();
 				newbook.settitle(newtitle);
@@ -475,6 +434,7 @@ public class bookmain{
 			}while(inputcomplete2 == 0);
 		
 		System.out.println("도서 등록 완료!");
+		System.out.println("***********************************");
 		librarian_menu();
 	}
 	//도서 업데이트
@@ -487,8 +447,95 @@ public class bookmain{
 	}
 	//로그아웃
 	public void logout() throws Exception{
+		//로그아웃 하시겠습니까?(Y/N) 메시지 출력
+		System.out.println("로그아웃 하시겠습니까?(Y/N)");
+		char Y,N;
+		char logout = (char)scan.nextInt();
+		//N이면 (로그인/회원가입/종료) 화면
+		if(logout == 'Y')
+		{
+			//사서메뉴 출력
+			librarian_menu();
+		}
+		
+		//Y이면 사서는 사서의 메뉴
+		else if(logout=='N')
+		{
+			show_menu();
+		}
+		else
+		{
+			the_end();
+		}
+		//로그아웃을 하지 않고 프로그램을 강제로 끄게 되는 경우
+		//해당 계정이 변경한 내용이 자동으로 저장되며 로그아웃된다.
+	}
+	
+	//학생의 메뉴
+	public void student_menu() throws Exception{
+		int stu_menu;
+		System.out.println("------------------------------");
+		System.out.println("1. 도서 검색");
+		System.out.println("2. 나의 대여 정보");
+		System.out.println("3. 로그아웃");
+		System.out.println("------------------------------");
+		System.out.print("메뉴 입력:");
+		stu_menu = scan.nextInt();
+
+		switch(stu_menu){
+		case 1:
+			book_search();
+			break;
+		case 2:
+			book_borrowinfo();
+			break;
+		case 3:
+			stu_logout();
+			break;
+		}
 		
 	}
+	//도서검색
+	public void book_search() throws Exception{
+		System.out.println("***********************************");
+		System.out.println("제목 : ");
+		scan.nextLine(); 
+
+		//도서 정보 명단에 있는 도서들의 제목과 비교
+		//입력한 단어가 포함된 모든 도서의 정보를 출력
+		System.out.println("검색한 단어를 포함한 모든 책이 검색되었습니다!");
+		System.out.println("***********************************");
+		//검색 단어를 입력하지 않고 Enter키 누르는 경우
+		//검색어를 입력하지 않았습니다. 다시 입력해주십시오. 메시지 출력
+		//도서 검색결과 없는경우
+		//검색어와 일치하는 결과가 없습니다. 메시지 출력
+	}
+	//대여목록
+	public void book_borrowinfo() throws Exception{
+		//도서 정보 명단의 대여자 중, 자신의 계정 아이디와 일치하는 도서들의 항목들을 출력시킨다.
+		//나의 도서대여 목록이 존재하지 않는다면 
+		//대여 중인 도서가 없습니다.메시지 출력
+	}
+	//로그아웃
+	public void stu_logout() throws Exception{
+		//로그아웃 하시겠습니까?(Y/N) 메시지 출력
+		System.out.println("로그아웃 하시겠습니까?(Y/N)");
+		scan.nextInt();
+		char logout = (char) scan.nextInt();
+		//N이면 (로그인/회원가입/종료) 화면
+		if(logout=='N')
+		{
+			show_menu();
+		}
+		//Y이면 사서는 사서의 메뉴로 학생은 학생의 메뉴로
+		else if(logout=='Y')
+		{
+			student_menu();
+		}
+		//로그아웃을 하지 않고 프로그램을 강제로 끄게 되는 경우
+		//해당 계정이 변경한 내용이 자동으로 저장되며 로그아웃된다.
+	}
+		
 }
 
 
