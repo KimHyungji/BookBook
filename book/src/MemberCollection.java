@@ -21,9 +21,21 @@ class MemberCollection{
 		this.memberCount=memberCount;
 	}
 	
-	public void addmem(Member m) throws IOException{
+	public void addmem(Member m) throws IOException, ClassNotFoundException{
 
+		try{
 		@SuppressWarnings("resource")
+		ObjectInputStream osi = new ObjectInputStream(new FileInputStream("membercollection.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
+		this.setMemberCount(osi.readInt());
+		collectionm.clear();
+		for( int i= 0; i< this.getMemberCount();i++){
+			Member ms = (Member)osi.readObject();
+			collectionm.add(i,ms);
+		}
+		}catch(IOException e){
+			System.out.println("파일없어서 새로생성함");
+		}
+		
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("membercollection.txt"));
 		//oos.close();
 		collectionm.add(m);
