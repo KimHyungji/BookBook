@@ -4,8 +4,6 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.io.*;
 import java.util.Vector;
-
-//@SuppressWarnings("unused")
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
@@ -13,28 +11,17 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 
 public class bookmain{
-	/*String newname;
-	String newauthor;
-	String newpublish;
-	String newborrower;
-	public Vector<Object> getall() { // 제네릭 설정
-		Vector<Object> myvector = new Vector<Object>();
-		myvector.add(newname);
-		myvector.add(newauthor);
-		myvector.add(newborrower);
-		return myvector;
-	}
-	*/
-
-	//Member[] bc = new Member[10];
+	
+	static MemberCollection membercollect;
 	Scanner scan = new Scanner(System.in);
 	int i=0;
 	private boolean TRUE;
-
+	
 
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws Exception{
-		@SuppressWarnings("unused")
+		
+		membercollect =new MemberCollection();
 		Scanner scan = new Scanner(System.in);
 		bookmain start = new bookmain();
 		start.show_menu();
@@ -62,7 +49,6 @@ public class bookmain{
 			break;
 		}
 	}
-
 	//로그인
 	public void login() throws Exception{
 		Member loginmem = new Member();
@@ -106,7 +92,6 @@ public class bookmain{
 		//학생 메뉴 출력 
 
 	}
-
 	//회원가입
 	public void join() throws Exception{
 		System.out.println("[회원가입 정보 입력]");
@@ -189,9 +174,9 @@ public class bookmain{
 			}
 		}while(inputcomplete == 0);
 
-		//newmem.addmem();
+		membercollect.addmem(newmem);
 		//회원가입에 성공할 시 '회원 가입 완료'메시지 출력
-		System.out.println("회원가입 완료!");
+		//System.out.println("회원가입 완료!");
 		System.out.println("***********************************");
 
 		System.out.println("로그인");

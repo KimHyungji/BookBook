@@ -4,15 +4,20 @@ import java.io.Serializable;
 
 class Member implements Serializable{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	public int ID;
 	public String password;
 	public String name;
 	public String major;
 
+	/*public Member(int ID,String password,String name, String major)
+	{
+		this.ID = ID;
+		this.password = password;
+		this.name = name;
+		this.major = major;
+	}
+	*/
+	
 	public void setID(int newID){
 		ID = newID;
 	}

@@ -11,6 +11,7 @@ class MemberCollection{
 		collection=new Vector<Member>();
 		memberCount=0;
 	}
+	
 	public int getMemberCount(){
 		return memberCount;
 	}
@@ -20,11 +21,12 @@ class MemberCollection{
 	public void addmem(Member m) throws IOException{
 
 		@SuppressWarnings("resource")
-		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("tmp.txt",true));
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("membercollection.txt"));
 		//oos.close();
 		collection.add(m);
-		oos.writeObject(collection);
+		oos.writeObject(m);
 		memberCount++;
 		System.out.println("회원가입 완료!");
 	}
+
 }

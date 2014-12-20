@@ -10,6 +10,16 @@ class Book implements Serializable{
 	public int ISBN;
 	public String avail;
 	public int borrower;
+	
+	/*public Book(String title, String author, String publish, int ISBN, String avail,int borrower)
+	{
+		this.title=title;
+		this.author = author;
+		this.publish = publish;
+		this.ISBN = ISBN;
+		this.avail = avail;
+		this.borrower = borrower;
+	}*/
 
 	public void settitle(String newtitle){
 		title = newtitle;
