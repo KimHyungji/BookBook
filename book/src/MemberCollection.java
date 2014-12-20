@@ -49,7 +49,7 @@ class MemberCollection{
 		System.out.println("회원가입 완료!");
 	}
 
-	public int getequal(int newID) throws Exception{
+	public int getequal(String id) throws Exception{
 
 		try{
 			@SuppressWarnings("resource")
@@ -61,7 +61,7 @@ class MemberCollection{
 				collectionm.add(i,ms);
 			}		
 			for(int i = 0; i<this.getMemberCount() ; i++){
-				if(collectionm.elementAt(i).ID == newID)
+				if(collectionm.elementAt(i).ID.equals(id))
 					return 1;
 				}
 			return -1;
@@ -71,9 +71,8 @@ class MemberCollection{
 	}
 	
 	
-	public int getequal2(int newID ,String newpassword) throws Exception{
-		//int newID = 0;
-			
+	public int getequal2(String id ,String newpassword) throws Exception{
+	
 		try{
 			@SuppressWarnings("resource")
 			ObjectInputStream osi = new ObjectInputStream(new FileInputStream("membercollection.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
@@ -84,7 +83,7 @@ class MemberCollection{
 				collectionm.add(i,ms);
 			}		
 			for(int i = 0; i<this.getMemberCount() ; i++){
-				if(collectionm.elementAt(i).ID == newID && collectionm.elementAt(i).password.equals(newpassword))
+				if(collectionm.elementAt(i).ID.equals(id) && collectionm.elementAt(i).password.equals(newpassword))
 					return 1;
 				}
 			return -1;

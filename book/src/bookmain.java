@@ -16,7 +16,7 @@ public class bookmain{
    public static BookCollection bookcollect;
    Scanner scan = new Scanner(System.in);
    int i=0;
-   private boolean TRUE;
+   public boolean TRUE;
    
 
    @SuppressWarnings("resource")
@@ -51,33 +51,35 @@ public class bookmain{
          break;
       }
    }
+   ////////////////////////////////////////////////////////////////////////
    //로그인
    public void login() throws Exception{
       Member loginmem = new Member();
-      int id;
+      String id;
       int loginputcomplete =0;
+      
       do{
          System.out.println("[아이디 입력]");
-         id = scan.nextInt();
+         scan.nextLine(); 
+         id = scan.next();
 
          //사서의 경우 사서의 아이디는 123으로 지정
-         if(id != 123){
+         if(id.equals("123") != TRUE){
             if(membercollect.getequal(id)==-1){
                System.out.println("존재하지 않는 아이디입니다.");
                loginputcomplete = 1;
             }
             else
                loginputcomplete = 0;
-         }
-         //loginputcomplete = 0;
-      }while(loginputcomplete ==1);
+            }
+         }while(loginputcomplete ==1);
 
       System.out.println("[비밀번호입력]");
       scan.nextLine(); 
-      String password = scan.nextLine();
+      String password = scan.next();
 
       //사서의경우비밀번호rootpass로지정
-      if(id == 123 && password.equals("rootpass"))
+      if((id.equals("123")==TRUE) && (password.equals("rootpass")))
       {
          //사서메뉴출력
          librarian_menu();
@@ -100,17 +102,19 @@ public class bookmain{
       //학생 메뉴 출력 
 
    }
+   ////////////////////////////////////////////////////////////////////////
    //회원가입
    public void join() throws Exception{
       System.out.println("[회원가입 정보 입력]");
 
       Member newmem = new Member();
       scan.nextLine();  // 자바 Scanner의 문제로 불필요한 개행문자를 제거하기 위해 임시로 넣은 코드임
-      int newID,inputcomplete=0;
+      int inputcomplete=0;
+      String newID;
       do{
          System.out.println("***********************************");
          System.out.print("학생 아이디(학번):");
-         newID = scan.nextInt();
+         newID = scan.next();
          if(membercollect.getequal(newID)==1){
             System.out.println("이미 사용중인 아이디입니다.");
          }
@@ -183,21 +187,21 @@ public class bookmain{
       }while(inputcomplete == 0);
 
       membercollect.addmem(newmem);
-      //회원가입에 성공할 시 '회원 가입 완료'메시지 출력
-      //System.out.println("회원가입 완료!");
       System.out.println("***********************************");
-
       System.out.println("로그인");
       login();
 
    }
+   ////////////////////////////////////////////////////////////////////////	
    //종료
    public void the_end(){
       System.exit(-1);
       //더 이상의 메뉴를 출력시키지 않는다.
 
    }
-//사서의 메뉴
+
+   ////////////////////////////////////////////////////////////////////////
+   //사서의 메뉴
    public void librarian_menu() throws Exception{
       int lib_menu;
       System.out.println("------------------------------");
@@ -304,7 +308,6 @@ public class bookmain{
 
    }
    //로그아웃
-   @SuppressWarnings("resource")
    public void logout() throws Exception{
       //로그아웃 하시겠습니까?(Y/N) 메시지 출력
       System.out.println("로그아웃 하시겠습니까?(Y/N)");
@@ -324,7 +327,7 @@ public class bookmain{
       //로그아웃을 하지 않고 프로그램을 강제로 끄게 되는 경우
       //해당 계정이 변경한 내용이 자동으로 저장되며 로그아웃된다.
    }
-
+   ////////////////////////////////////////////////////////////////////////
    //학생의 메뉴
    public void student_menu() throws Exception{
       int stu_menu;

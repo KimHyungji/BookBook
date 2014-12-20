@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 class Member implements Serializable{
 
-	public int ID;
+	public String ID;
 	public String password;
 	public String name;
 	public String major;
@@ -18,7 +18,7 @@ class Member implements Serializable{
 	}
 	*/
 	
-	public void setID(int newID){
+	public void setID(String newID){
 		ID = newID;
 	}
 	public void setpassword(String newpassword){
