@@ -115,6 +115,21 @@ public class bookmain{
          System.out.println("***********************************");
          System.out.print("학생 아이디(학번):");
          newID = scan.next();
+         
+         //아이디는 7자리 숫자이어야 한다.메시지출력하기
+         do{
+        	 if(newID.length() < 7)
+        	 {
+        		 System.out.println("자신의 7자리 숫자 학번을 입력해주세요.");
+        		 System.out.print("학생 아이디(학번):");
+                 newID = scan.next();
+                 }
+        	 
+        	 else
+        		 inputcomplete =1;
+         }while(inputcomplete ==0);
+         //
+         inputcomplete = 0;
          if(membercollect.getequal(newID)==1){
             System.out.println("이미 사용중인 아이디입니다.");
          }
