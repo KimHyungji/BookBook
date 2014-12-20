@@ -9,9 +9,9 @@ class Book implements Serializable{
 	public String publish;
 	public int ISBN;
 	public String avail;
-	public int borrower;
+	public String borrower;
 	
-	/*public Book(String title, String author, String publish, int ISBN, String avail,int borrower)
+	/*public Book(String title, String author, String publish, int ISBN, String avail,String borrower)
 	{
 		this.title=title;
 		this.author = author;
@@ -36,7 +36,7 @@ class Book implements Serializable{
 	public void setavail(String newavail){
 		avail = newavail;
 	}
-	public void setborrower(int newborrower){
+	public void setborrower(String newborrower){
 		borrower = newborrower;
 	}
 	public int getequal(int newISBN) throws Exception{

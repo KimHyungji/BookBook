@@ -283,10 +283,10 @@ public class bookmain{
       }while(inputcomplete2 == 0);
 
       inputcomplete2 = 0;
-      int newborrower;
+      String newborrower;
       do{
          System.out.print("´ë¿©ÀÚ:");
-         newborrower = scan.nextInt();
+         newborrower = scan.nextLine();
          newbook.setborrower(newborrower);
          inputcomplete2 = 1;
       }while(inputcomplete2 == 0);
