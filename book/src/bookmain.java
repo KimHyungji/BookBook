@@ -164,6 +164,7 @@ public class bookmain{
 	//Member[] bc = new Member[10];
 	Scanner scan = new Scanner(System.in);
 	int i=0;
+	private boolean TRUE;
   
 	
 	@SuppressWarnings("resource")
@@ -446,27 +447,27 @@ public class bookmain{
 		
 	}
 	//로그아웃
+	@SuppressWarnings("resource")
 	public void logout() throws Exception{
 		//로그아웃 하시겠습니까?(Y/N) 메시지 출력
+	    Scanner scan = new Scanner(System.in); 
 		System.out.println("로그아웃 하시겠습니까?(Y/N)");
-		char Y,N;
-		char logout = (char)scan.nextInt();
-		//N이면 (로그인/회원가입/종료) 화면
-		if(logout == 'Y')
+		scan.next();
+		String logout = scan.next();//N이면 (로그인/회원가입/종료) 화면
+
+		do
 		{
 			//사서메뉴 출력
-			librarian_menu();
-		}
+			if(logout == "Y")
+				{
+				librarian_menu();
+				}
+			else if(logout=="N")
+				show_menu();
+			
+		}while(TRUE);
 		
 		//Y이면 사서는 사서의 메뉴
-		else if(logout=='N')
-		{
-			show_menu();
-		}
-		else
-		{
-			the_end();
-		}
 		//로그아웃을 하지 않고 프로그램을 강제로 끄게 되는 경우
 		//해당 계정이 변경한 내용이 자동으로 저장되며 로그아웃된다.
 	}
@@ -520,15 +521,15 @@ public class bookmain{
 	public void stu_logout() throws Exception{
 		//로그아웃 하시겠습니까?(Y/N) 메시지 출력
 		System.out.println("로그아웃 하시겠습니까?(Y/N)");
-		scan.nextInt();
-		char logout = (char) scan.nextInt();
+		scan.nextLine();
+		String logout = scan.nextLine();
 		//N이면 (로그인/회원가입/종료) 화면
-		if(logout=='N')
+		if(logout=="N")
 		{
 			show_menu();
 		}
 		//Y이면 사서는 사서의 메뉴로 학생은 학생의 메뉴로
-		else if(logout=='Y')
+		else if(logout=="Y")
 		{
 			student_menu();
 		}
