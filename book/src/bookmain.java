@@ -72,23 +72,29 @@ public class bookmain{
          //loginputcomplete = 0;
       }while(loginputcomplete ==1);
 
-      System.out.println("[비밀번호 입력]");
+      System.out.println("[비밀번호입력]");
       scan.nextLine(); 
       String password = scan.nextLine();
 
-      //사서의 경우 비밀번호 rootpass로 지정
+      //사서의경우비밀번호rootpass로지정
       if(id == 123 && password.equals("rootpass"))
       {
-         //사서메뉴 출력
+         //사서메뉴출력
          librarian_menu();
+      }
+      else if(membercollect.getequal2(id,password)==1){
+    
+    System.out.println("로그인되었습니다.");
+    student_menu();
       }
       else
       {
-         //‘로그인에 실패하였습니다. 아이디와 패스워드를 다시 입력해주세요.’메시지출력
-         System.out.println("로그인에 실패하였습니다. 아이디와 패스워드를 다시 입력해주세요.");
-         //다시 로그인 화면
+         //‘로그인에실패하였습니다. 아이디와패스워드를다시입력해주세요.’메시지출력
+         System.out.println("로그인에실패하였습니다. 아이디와패스워드를다시입력해주세요.");
+         //다시로그인화면
          show_menu();
       }
+
 
       //학생의 경우 비밀번호가 파일에 있으면 ‘로그인 되었습니다.’라는 메시지를 출력
       //학생 메뉴 출력 

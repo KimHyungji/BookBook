@@ -69,4 +69,27 @@ class MemberCollection{
 			return -1;
 		}
 	}
+	
+	
+	public int getequal2(int newID ,String newpassword) throws Exception{
+		//int newID = 0;
+			
+		try{
+			@SuppressWarnings("resource")
+			ObjectInputStream osi = new ObjectInputStream(new FileInputStream("membercollection.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
+			this.setMemberCount(osi.readInt());
+			collectionm.clear();
+			for( int i= 0; i< this.getMemberCount();i++){
+				Member ms = (Member)osi.readObject();
+				collectionm.add(i,ms);
+			}		
+			for(int i = 0; i<this.getMemberCount() ; i++){
+				if(collectionm.elementAt(i).ID == newID && collectionm.elementAt(i).password.equals(newpassword))
+					return 1;
+				}
+			return -1;
+		}catch(Exception e){
+			return -1;
+		}
+	}
 }
