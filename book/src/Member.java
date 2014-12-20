@@ -31,21 +31,6 @@ class Member implements Serializable{
 		major = newmajor;
 	}
 
-	public int getequal(int newID) throws Exception{
-
-		try{
-			@SuppressWarnings("resource")
-			ObjectInputStream osi = new ObjectInputStream(new FileInputStream("tmp.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
-			//i = osi.readInt();
-			while(osi.readObject() != null){
-				Member ms = (Member)osi.readObject();
-				if(newID == ms.ID)
-					return 1;
-			}
-		}catch(Exception e){
-			return -1;
-		}
-		return -1;
-	}
+	
 
 }

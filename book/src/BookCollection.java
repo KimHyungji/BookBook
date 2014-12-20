@@ -4,26 +4,28 @@ import java.io.ObjectOutputStream;
 import java.util.Vector;
 
 class BookCollection{
-	public Vector<Book> collection;
+	public Vector<Book> collectionb;
 	public int bookCount;
 
 	public BookCollection(){
-		collection=new Vector<Book>();
+		collectionb=new Vector<Book>();
 		bookCount=0;
 	}
+	
 	public int getBookCount(){
 		return bookCount;
 	}
 	public void setBookCount(int bookCount){
 		this.bookCount=bookCount;
 	}
-	public void addbook(Book book) throws IOException{
+	public void addbook(Book b) throws IOException{
 
 		@SuppressWarnings("resource")
-		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("book.txt",true));
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("bookcollection.txt"));
 		//oos.close();
-		collection.add(book);
-		oos.writeObject(collection);
+		collectionb.add(b);
+		oos.writeObject(b);
 		bookCount++;
+		System.out.println("도서 등록 완료!");
 	}
 }
