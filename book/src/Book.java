@@ -39,23 +39,7 @@ class Book implements Serializable{
 	public void setborrower(String newborrower){
 		borrower = newborrower;
 	}
-	public int getequal(int newISBN) throws Exception{
 
-		try{
-			@SuppressWarnings("resource")
-			ObjectInputStream osi = new ObjectInputStream(new FileInputStream("bookcollection.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
-			//i = osi.readInt();
-			while(osi.readObject() != null){
-				Book book = (Book)osi.readObject();
-				if(newISBN == book.ISBN)
-					return 1;
-			}
-		}catch(Exception e){
-			return -1;
-		}
-		return -1;
-	}
-	
 	
 }
 
