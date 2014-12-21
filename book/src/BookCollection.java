@@ -86,6 +86,8 @@ class BookCollection{
 				Book ms = (Book)osi.readObject();
 				collectionb.add(i,ms);
 			}		
+			System.out.println("제목"+'\t'+ "지은이"+ '\t'+"출판사"+'\t'+"ISBN"+'\t'+"대출여부"+'\t'+"대여자");	
+        	System.out.println("**********************************************************");
 			for(i = 0; i<this.getBookCount() ; i++){
 				if((collectionb.elementAt(i).title).indexOf(newtitle)>=0)
 				{	
@@ -122,7 +124,32 @@ class BookCollection{
 		}
 	}
 
-
-
+	 public int findmybook(String findID) throws ClassNotFoundException{
+		   
+		   try{
+			   int findnum =0;
+		         @SuppressWarnings("resource")
+		         ObjectInputStream osb = new ObjectInputStream(new FileInputStream("bookcollection.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
+		         this.setBookCount(osb.readInt());
+		         collectionb.clear();
+		         System.out.println("제목"+'\t'+ "지은이"+ '\t'+"출판사"+'\t'+"ISBN"+'\t'+"대출여부"+'\t'+"대여자");	
+		         System.out.println("**********************************************************");
+		         for( int i= 0; i< this.getBookCount();i++){
+		            Book ms = (Book)osb.readObject();
+		            collectionb.add(i,ms);
+		            if((ms.borrower).equals(findID)){
+		            	System.out.println(ms.toString());
+		            	findnum++;
+		            }
+		         }
+		         if(findnum > 0){
+		        	 return 1;
+		         }else
+		        	 return -1;
+		      }catch(IOException e){
+		         System.out.println("파일없어서 새로생성함");
+		      }
+		   return -1;
+	   }
 
 }

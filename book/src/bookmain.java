@@ -87,9 +87,10 @@ public class bookmain{
 			librarian_menu();
 		}
 		else if(membercollect.getequal2(id,password)==1){
-
+			loginmem.ID =id;
+			loginmem.password =password;
 			System.out.println("로그인되었습니다.");
-			student_menu();
+			student_menu(loginmem);
 		}
 		else
 		{
@@ -354,7 +355,7 @@ public class bookmain{
 	}
 	////////////////////////////////////////////////////////////////////////
 	//학생의 메뉴
-	public void student_menu() throws Exception{
+	public void student_menu(Member loginmem) throws Exception{
 		int stu_menu;
 		System.out.println("------------------------------");
 		System.out.println("1. 도서 검색");
@@ -369,10 +370,10 @@ public class bookmain{
 			book_search();
 			break;
 		case 2:
-			book_borrowinfo();
+			book_borrowinfo(loginmem.ID);
 			break;
 		case 3:
-			stu_logout();
+			stu_logout(loginmem);
 			break;
 		}
 
@@ -437,13 +438,16 @@ public class bookmain{
 
 	}
 	//대여목록
-	public void book_borrowinfo() throws Exception{
+	public void book_borrowinfo(String findID) throws Exception{
 		//도서 정보 명단의 대여자 중, 자신의 계정 아이디와 일치하는 도서들의 항목들을 출력시킨다.
 		//나의 도서대여 목록이 존재하지 않는다면 
 		//대여 중인 도서가 없습니다.메시지 출력
+		if(bookcollect.findmybook(findID) == -1){
+			System.out.println("대여중인 도서가 없습니다.");
+		}
 	}
 	//로그아웃
-	public void stu_logout() throws Exception{
+	public void stu_logout(Member loginmem) throws Exception{
 		//로그아웃 하시겠습니까?(Y/N) 메시지 출력
 		System.out.println("로그아웃 하시겠습니까?(Y/N)");
 		scan.nextLine();
@@ -456,7 +460,7 @@ public class bookmain{
 		//Y이면 사서는 사서의 메뉴로 학생은 학생의 메뉴로
 		else if(logout.equals("N"))
 		{
-			student_menu();
+			student_menu(loginmem);
 		}
 		//로그아웃을 하지 않고 프로그램을 강제로 끄게 되는 경우
 		//해당 계정이 변경한 내용이 자동으로 저장되며 로그아웃된다.
