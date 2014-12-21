@@ -65,9 +65,9 @@ public class bookmain{
 			scan.nextLine(); 
 			id = scan.next();
 			//사서의 경우 사서의 아이디는 123으로 지정
-			
+
 			if((id.equals("0000123")) == TRUE){
-				
+
 				if(membercollect.getequal(id)==-1){
 					System.out.println("존재하지 않는 아이디입니다.");
 					loginputcomplete =1;
@@ -76,8 +76,8 @@ public class bookmain{
 					loginputcomplete = 0;
 			}
 			else
-			loginputcomplete =0;
-			
+				loginputcomplete =0;
+
 		}while(loginputcomplete ==1);
 
 		System.out.println("[비밀번호입력]");
@@ -329,135 +329,61 @@ public class bookmain{
 		System.out.println("***********************************");
 		librarian_menu();
 	}
-	
-	//
-	public Book search_ISBN() throws Exception{ 
-		int ISBN=0;
-		int x=1;
-		do{        
-            System.out.print("검색할 도서의 ISBN을 선택하세요  : ");
-            ISBN = scan.nextInt();
-            Book ISBNmatching;
-            
-            if(bookcollect.getequalISBN(ISBN)==1)
-            {
-               ISBNmatching = bookcollect.print(ISBN);
-               System.out.println("*******************************************************************");
-               return ISBNmatching;
-               }
-            else{
-            	System.out.println("일치하는 ISBN이 존재하지 않습니다.");
-            	librarian_menu();
-            }
-         }while(x==0);
-		return null;
-	}
-	
-	public Book book_search_lib() throws Exception{ 
-	      int x=0, y=0;
-	      //도서정보명단에있는도서들의제목과비교
-	      //입력한단어가포함된모든도서의정보를출력
-	      String newtitle;
-	      int ISBN = 0;
-	      System.out.print("1.제목 or 2.ISBN 선택 (번호로 선택) : ");
-	      x= scan.nextInt(); 
-	      if(x==1)
-    	  {
-	         do{
-	            System.out.println("*******************************************************************");
-	            System.out.print("제목:");
-	            newtitle = scan.next();
-	            
-	            if(bookcollect.getequal2(newtitle)==1)
-	            {
-	               bookcollect.print(newtitle);
-	               System.out.println("*******************************************************************");
-	               y=1;
-	               }
-	            else
-	            	y=2;
-
-	         }while(x==0);
-	         
-	      }
-	      if(x==2){
-	         do{
-	            System.out.println("*******************************************************************");
-	            //ISBN으로 검색하는 함수 만들기
-	            Book result_book =search_ISBN();
-	            
-	            
-	         }while(x==0);
-	      }
-	     
-    	  if(y==1){
-            System.out.println("검색한단어를포함한모든책이검색되었습니다!");
-            System.out.println("*******************************************************************");
-            //ISBN으로 검색하는 함수 만들기
-            search_ISBN();
-            }
-	      else if(y==2){
-	    	  System.out.println("검색어와일치하는결과가없습니다!");
-	    	  System.out.println("*******************************************************************");
-            }
-		return null;
-		
-    	  }
-		
-	      //검색단어를입력하지않고Enter키누르는경우
-	      //검색어를입력하지않았습니다. 다시입력해주십시오. 메시지출력
-
-	      //도서검색결과없는경우
-	      //검색어와일치하는결과가없습니다. 메시지출력
-
-
 
 	//도서 업데이트
 	public void book_update() throws Exception{
-			int updateselection, field, inputcompleteup;
-//			Scanner scan = new Scanner(System.in);
-		    Book findbook=book_search_lib();
-		    System.out.println("업데이트 할 항목의 번호를 선택해주세요.\n 1. 제목 \n2. 저자 \n3. 출판사 \n4. ISBN \n5. 대출 여부 \n6. 대여자");
-		    field = scan.nextInt();
-		      
-		    findbook=bookcollect.updatefield(field, findbook);
-		
-		    System.out.println(findbook.title);
-		    
-//		    bookcollect.print(findbook.toString());
-		      
-		    System.out.println("업데이트를 계속 하시겠습니까?(Y/N)");
-		    scan.nextLine();
-	        String updatecheck = scan.nextLine();
+		int field = 0, updatecomplete =1;
+		//Scanner scan = new Scanner(System.in);
+		Book findbook = bookcollect.book_search_lib();
 
-	        if (updatecheck.equals("Y")) {
-	        	book_update();
-	        	} 
-	        else if (updatecheck.equals("N")) {
-		        librarian_menu();
-		        }
-		}
-		//도서 삭제
-		public void book_delete() throws Exception{
-			//정말 삭제하시겠습니까(Y/N)? 라는 메시지 출력
-			//삭제하겠다면 ‘Y’라고 입력하고 삭제하지 않으려면 ‘N’
-			//도서 삭제를 완료 하였다면 ‘도서 삭제 완료!’라는 메시지와 함께 사서의 메뉴화면으로 넘어간다.
-			//입력한 값이 ‘N’인 경우 사서의 메뉴화면 출력
-	        Book deletebook=book_search_lib(); 
-	        
-	          System.out.println("정말 삭제하시겠습니까?(Y/N)");
-	          scan.nextLine();
-	          
-	           String deletecheck = scan.nextLine();
+		if (findbook == null){
+			librarian_menu();
+		}else{
+		do{
+		System.out.println("업데이트 할 항목의 번호를 선택해주세요.\n 1. 제목 \n2. 저자 \n3. 출판사 \n4. ISBN \n5. 대출 여부 \n6. 대여자");
+		field = scan.nextInt();
 
-	           if (deletecheck.equals("Y")) {
-	              bookcollect.delete(deletebook);
-	              librarian_menu();
-	              } 
-	           else if (deletecheck.equals("N")) {
-	              librarian_menu();
-	              }
+		findbook=bookcollect.updatefield(field, findbook);
+
+		//System.out.println(findbook.title);
+
+		System.out.println(findbook.toString());
+
+		System.out.println("업데이트를 계속 하시겠습니까?(Y/N)");
+		scan.nextLine();
+		String updatecheck = scan.nextLine();
+
+		if (updatecheck.equals("Y")) {
+			updatecomplete =1;
+		} 
+		else if (updatecheck.equals("N")) {
+			updatecomplete = 0;
+			librarian_menu();
 		}
+		}while(updatecomplete ==1);
+		}
+	}
+	//도서 삭제
+	public void book_delete() throws Exception{
+		//정말 삭제하시겠습니까(Y/N)? 라는 메시지 출력
+		//삭제하겠다면 ‘Y’라고 입력하고 삭제하지 않으려면 ‘N’
+		//도서 삭제를 완료 하였다면 ‘도서 삭제 완료!’라는 메시지와 함께 사서의 메뉴화면으로 넘어간다.
+		//입력한 값이 ‘N’인 경우 사서의 메뉴화면 출력
+		Book deletebook = bookcollect.book_search_lib(); 
+
+		System.out.println("정말 삭제하시겠습니까?(Y/N)");
+		scan.nextLine();
+
+		String deletecheck = scan.nextLine();
+
+		if (deletecheck.equals("Y")) {
+			bookcollect.delete(deletebook);
+			librarian_menu();
+		} 
+		else if (deletecheck.equals("N")) {
+			librarian_menu();
+		}
+	}
 	//로그아웃
 	public void logout() throws Exception{
 		//로그아웃 하시겠습니까?(Y/N) 메시지 출력
