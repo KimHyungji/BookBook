@@ -342,33 +342,33 @@ public class bookmain{
 		if (findbook == null){
 			librarian_menu();
 		}else{
-		do{
-		System.out.println("업데이트 할 항목의 번호를 선택해주세요.\n 1. 제목 \n2. 저자 \n3. 출판사 \n4. ISBN \n5. 대출 여부 \n6. 대여자");
-		field = scan.nextInt();
+			do{
+				System.out.println("업데이트 할 항목의 번호를 선택해주세요.\n 1. 제목 \n2. 저자 \n3. 출판사 \n4. ISBN \n5. 대출 여부 \n6. 대여자");
+				field = scan.nextInt();
 
-		findbook=bookcollect.updatefield(field, findbook);
+				findbook=bookcollect.updatefield(field, findbook);
 
-		//System.out.println(findbook.title);
-		System.out.println("제목"+'\t'+ "지은이"+ '\t'+"출판사"+'\t'+"ISBN"+'\t'+"대출여부"+'\t'+"대여자");	
-		System.out.println("**********************************************************");
-		System.out.println(findbook.toString());
-		bookcollect.savenow();
+				//System.out.println(findbook.title);
+				System.out.println("제목"+'\t'+ "지은이"+ '\t'+"출판사"+'\t'+"ISBN"+'\t'+"대출여부"+'\t'+"대여자");	
+				System.out.println("**********************************************************");
+				System.out.println(findbook.toString());
+				bookcollect.savenow();
 
-		System.out.println("해당 도서에 대한 업데이트를 계속 하시겠습니까?(Y/N)");
-		scan.nextLine();
-		String updatecheck = scan.nextLine();
+				System.out.println("해당 도서에 대한 업데이트를 계속 하시겠습니까?(Y/N)");
+				scan.nextLine();
+				String updatecheck = scan.nextLine();
 
-		if (updatecheck.equals("Y")) {
-			updatecomplete =1;
-		} 
-		else if (updatecheck.equals("N")) {
-			updatecomplete = 0;
-			librarian_menu();
+				if (updatecheck.equals("Y")) {
+					updatecomplete =1;
+				} 
+				else if (updatecheck.equals("N")) {
+					updatecomplete = 0;
+					librarian_menu();
+				}
+			}while(updatecomplete ==1);
 		}
-		}while(updatecomplete ==1);
-		}
-		
-		
+
+
 	}
 	//도서 삭제
 	public void book_delete() throws Exception{
@@ -448,21 +448,27 @@ public class bookmain{
 		BookCollection newbook1 = new  BookCollection();
 		Book newbook = new Book();
 		String newtitle;
-
+				Member loginmem = null;
+				int ch=0;
 		do{
 			System.out.println("*******************************************************************");
 			System.out.print("제목:");
-			// scan.next(); 
+			//scan.next(); 
 			newtitle = scan.next();
 
-			if(bookcollect.getequal2(newtitle)==1){      	
+			ch = newtitle.toCharArray()[0];
+			//ch=newtitle.charAt(0);
+			if(bookcollect.getequal2(newtitle)==1){      
 
 				a=1;
 				bookcollect.print(newtitle);
 				System.out.println("*******************************************************************");
 			}
-			else
+			else if(newtitle.length() == 0 && ch == 10) //13
 			{
+				System.out.println("검색어를입력하지않았습니다. 다시입력해주십시오.");
+			}
+			else{
 				a=2;
 
 			}
@@ -473,20 +479,19 @@ public class bookmain{
 		if(a==1){
 			System.out.println("검색한단어를포함한모든책이검색되었습니다!");
 			System.out.println("*******************************************************************");
+			student_menu(loginmem);
 
 		}
 		else if(a==2){
 			System.out.println("검색어와일치하는결과가없습니다!");
 			System.out.println("*******************************************************************");
+			student_menu(loginmem);
 
 		}
 
 		//검색단어를입력하지않고Enter키누르는경우
 		//검색어를입력하지않았습니다. 다시입력해주십시오. 메시지출력
 
-
-		//도서검색결과없는경우
-		//검색어와일치하는결과가없습니다. 메시지출력
 
 
 	}
