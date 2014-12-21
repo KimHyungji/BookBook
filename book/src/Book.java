@@ -28,7 +28,7 @@ class Book implements Serializable{
 		author = newauthor;
 	}
 	public void setpublish(String newpublish){
-		author = newpublish;
+		publish = newpublish;
 	}
 	public void setISBN(int newISBN){
 		ISBN = newISBN;
