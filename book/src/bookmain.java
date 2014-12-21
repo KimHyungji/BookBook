@@ -349,7 +349,7 @@ public class bookmain{
 
 		System.out.println(findbook.toString());
 
-		System.out.println("업데이트를 계속 하시겠습니까?(Y/N)");
+		System.out.println("해당 도서에 대한 업데이트를 계속 하시겠습니까?(Y/N)");
 		scan.nextLine();
 		String updatecheck = scan.nextLine();
 

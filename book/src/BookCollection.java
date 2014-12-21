@@ -217,11 +217,16 @@ class BookCollection{
 			do {
 				System.out.print("Update ISBN:");
 				updateISBN = scan.nextInt();
+				if(1000>updateISBN || updateISBN>=10000){
+					System.out.println("ISBN은 4자리로 입력해주세요.(1000~9999)");
+				}
+				else{
 				if (getequalISBN(updateISBN) == 1) {
 					System.out.println("이미 등록된 ISBN이므로 업데이트할 수 없습니다.");
 				} else {
 					updatebook.setISBN(updateISBN);
 					inputcompleteup = 1;
+				}
 				}
 			} while (inputcompleteup == 0);
 			break;
