@@ -5,7 +5,10 @@ import java.util.Scanner;
 import java.io.*;
 import java.util.Vector;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
@@ -346,8 +349,10 @@ public class bookmain{
 		findbook=bookcollect.updatefield(field, findbook);
 
 		//System.out.println(findbook.title);
-
+		System.out.println("제목"+'\t'+ "지은이"+ '\t'+"출판사"+'\t'+"ISBN"+'\t'+"대출여부"+'\t'+"대여자");	
+		System.out.println("**********************************************************");
 		System.out.println(findbook.toString());
+		bookcollect.savenow();
 
 		System.out.println("해당 도서에 대한 업데이트를 계속 하시겠습니까?(Y/N)");
 		scan.nextLine();
@@ -362,6 +367,8 @@ public class bookmain{
 		}
 		}while(updatecomplete ==1);
 		}
+		
+		
 	}
 	//도서 삭제
 	public void book_delete() throws Exception{

@@ -344,14 +344,22 @@ class BookCollection{
 		return null;
 
 	}
-
+	public void savenow(){
+		
+	try{
+		ObjectOutputStream oob = new ObjectOutputStream(new FileOutputStream("bookcollection.txt"));
+		oob.writeInt(this.getBookCount());
+		for(int i = 0; i<this.getBookCount() ; i++){
+			oob.writeObject(collectionb.elementAt(i));
+		}
+		oob.close();
+	}catch(IOException e){
+	}
+	}
 	//검색단어를입력하지않고Enter키누르는경우
 	//검색어를입력하지않았습니다. 다시입력해주십시오. 메시지출력
 
 	//도서검색결과없는경우
 	//검색어와일치하는결과가없습니다. 메시지출력
-
-
-
 
 }
