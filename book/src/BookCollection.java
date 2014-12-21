@@ -75,7 +75,7 @@ class BookCollection{
 
 	}
 
-	public String print(String newtitle) {
+	public void print(String newtitle) {
 		try{
 
 			@SuppressWarnings("resource")
@@ -89,24 +89,18 @@ class BookCollection{
 			for(i = 0; i<this.getBookCount() ; i++){
 				if((collectionb.elementAt(i).title).indexOf(newtitle)>=0)
 				{	
-
-					description="제목:"+collectionb.elementAt(i).title+"\n";
-					description+="저자: "+collectionb.elementAt(i).author+"\n";
-					description+="출판사: "+collectionb.elementAt(i).publish+"\n";
-					description+="ISBN: "+collectionb.elementAt(i).ISBN+"\n";
-					description+="대출가능: "+collectionb.elementAt(i).avail+"\n";
-					description+="대여자: "+collectionb.elementAt(i).borrower+"\n";
-
+					System.out.println(collectionb.elementAt(i).toString());
 				}
-
 			}
-
 		}catch(Exception e){
 
 		}
-		return description;
+		
 	}
-
+	
+	
+	
+	
 	public int getequalISBN(int newISBN) throws Exception{
 
 		try{

@@ -300,9 +300,9 @@ public class bookmain{
 		inputcomplete2 = 0;
 		String newavail;
 		do{
-			System.out.print("대출 여부:");
-			newavail = scan.nextLine();
+			System.out.print("대출 여부(o/x):");
 			scan.nextLine();
+			newavail = scan.nextLine();
 			newbook.setavail(newavail);
 			inputcomplete2 = 1;
 		}while(inputcomplete2 == 0);
@@ -391,7 +391,7 @@ public class bookmain{
 		String newtitle;
 
 		do{
-			System.out.println("***********************************");
+			System.out.println("*******************************************************************");
 			System.out.print("제목:");
 			// scan.next(); 
 			newtitle = scan.next();
@@ -399,7 +399,8 @@ public class bookmain{
 			if(bookcollect.getequal2(newtitle)==1){      	
 
 				a=1;
-				bookcollect.print(newtitle);	
+				bookcollect.print(newtitle);
+				System.out.println("*******************************************************************");
 			}
 			else
 			{
@@ -412,14 +413,14 @@ public class bookmain{
 
 		if(a==1){
 			System.out.println("검색한단어를포함한모든책이검색되었습니다!");
-			System.out.println("***********************************");
+			System.out.println("*******************************************************************");
 
 
 
 		}
 		else if(a==2){
 			System.out.println("검색어와일치하는결과가없습니다!");
-			System.out.println("***********************************");
+			System.out.println("*******************************************************************");
 
 		}
 

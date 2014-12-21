@@ -40,6 +40,16 @@ class Book implements Serializable{
 		borrower = newborrower;
 	}
 
+public String toString(){
+		
+	String description ="";
+	description="제목"+'\t'+ "지은이"+ '\t'+"출판사"+'\t'+"ISBN"+'\t'+"대출여부"+'\t'+"대여자"+'\n';	
+	//description+="*******************************************************************"+'\n';
+	description+=this.title+'\t'+ this.author+ '\t'+this.publish+'\t'+this.ISBN+'\t'+this.avail
+	+'\t'+this.borrower+'\n';
+	
+		return description;
+	}
 	
 }
 
