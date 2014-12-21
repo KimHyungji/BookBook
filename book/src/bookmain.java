@@ -58,22 +58,26 @@ public class bookmain{
 	public void login() throws Exception{
 		Member loginmem = new Member();
 		String id;
-		int loginputcomplete =0;
+		int loginputcomplete =1;
 
 		do{
 			System.out.println("[아이디 입력]");
 			scan.nextLine(); 
 			id = scan.next();
-
 			//사서의 경우 사서의 아이디는 123으로 지정
-			if(id.equals("123") != TRUE){
+			
+			if((id.equals("0000123")) == TRUE){
+				
 				if(membercollect.getequal(id)==-1){
 					System.out.println("존재하지 않는 아이디입니다.");
-					loginputcomplete = 1;
-				}
+					loginputcomplete =1;
+				}				
 				else
 					loginputcomplete = 0;
 			}
+			else
+			loginputcomplete =0;
+			
 		}while(loginputcomplete ==1);
 
 		System.out.println("[비밀번호입력]");
@@ -81,7 +85,7 @@ public class bookmain{
 		String password = scan.next();
 
 		//사서의경우비밀번호rootpass로지정
-		if((id.equals("123")==TRUE) && (password.equals("rootpass")))
+		if((id.equals("0000123") !=TRUE) && (password.equals("rootpass")))
 		{
 			//사서메뉴출력
 			librarian_menu();
