@@ -43,7 +43,7 @@ class Book implements Serializable{
 
 		try{
 			@SuppressWarnings("resource")
-			ObjectInputStream osi = new ObjectInputStream(new FileInputStream("book.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
+			ObjectInputStream osi = new ObjectInputStream(new FileInputStream("bookcollection.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
 			//i = osi.readInt();
 			while(osi.readObject() != null){
 				Book book = (Book)osi.readObject();
@@ -55,5 +55,7 @@ class Book implements Serializable{
 		}
 		return -1;
 	}
+	
+	
 }
 
