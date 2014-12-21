@@ -249,4 +249,31 @@ class BookCollection{
 	      }
 	      return findbook;
 	   }
+	 
+	 public void delete(Book deletebook) throws ClassNotFoundException{
+	      try{
+	         ObjectInputStream osb = new ObjectInputStream(new FileInputStream("bookcollection.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
+	         this.setBookCount(osb.readInt());
+	         collectionb.clear();
+	         for( int i= 0; i< this.getBookCount();i++){
+	            Book ms = (Book)osb.readObject();
+	            collectionb.add(i,ms);
+	         }
+	      }catch(IOException e){
+	      }
+	      
+	      try{
+	      ObjectOutputStream oob = new ObjectOutputStream(new FileOutputStream("bookcollection.txt"));
+	      collectionb.remove(deletebook);
+	      bookCount--;
+	      this.setBookCount(bookCount);
+
+	      oob.writeInt(this.getBookCount());
+	      for(int i = 0; i<this.getBookCount() ; i++){
+	         oob.writeObject(collectionb.elementAt(i));
+	      }
+	      }catch(IOException e){
+	      }
+	      System.out.println("도서 삭제 완료!");
+	   }
 }

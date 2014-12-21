@@ -439,12 +439,24 @@ public class bookmain{
 		}
 		//도서 삭제
 		public void book_delete() throws Exception{
-			
-			
 			//정말 삭제하시겠습니까(Y/N)? 라는 메시지 출력
 			//삭제하겠다면 ‘Y’라고 입력하고 삭제하지 않으려면 ‘N’
 			//도서 삭제를 완료 하였다면 ‘도서 삭제 완료!’라는 메시지와 함께 사서의 메뉴화면으로 넘어간다.
 			//입력한 값이 ‘N’인 경우 사서의 메뉴화면 출력
+	        Book deletebook=book_search_lib(); 
+	        
+	          System.out.println("정말 삭제하시겠습니까?(Y/N)");
+	          scan.nextLine();
+	          
+	           String deletecheck = scan.nextLine();
+
+	           if (deletecheck.equals("Y")) {
+	              bookcollect.delete(deletebook);
+	              librarian_menu();
+	              } 
+	           else if (deletecheck.equals("N")) {
+	              librarian_menu();
+	              }
 		}
 	//로그아웃
 	public void logout() throws Exception{
@@ -529,8 +541,6 @@ public class bookmain{
 			System.out.println("검색한단어를포함한모든책이검색되었습니다!");
 			System.out.println("*******************************************************************");
 
-
-
 		}
 		else if(a==2){
 			System.out.println("검색어와일치하는결과가없습니다!");
@@ -544,9 +554,6 @@ public class bookmain{
 
 		//도서검색결과없는경우
 		//검색어와일치하는결과가없습니다. 메시지출력
-
-
-
 
 
 	}
