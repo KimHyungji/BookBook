@@ -134,13 +134,12 @@ public class bookmain{
 					System.out.print("학생 아이디(학번):");
 					newID = scan.next();
 				}
-
 				else
 					inputcomplete =1;
 			}while(inputcomplete ==0);
 			//
 			inputcomplete = 0;
-			if(membercollect.getequal(newID)==1){
+			if((membercollect.getequal(newID)==1) || (newID.equals("0000123") != TRUE)){
 				System.out.println("이미 사용중인 아이디입니다.");
 			}
 			else{
@@ -148,6 +147,7 @@ public class bookmain{
 				newmem.setID(newID);
 				inputcomplete =1;
 			}
+			
 		}while(inputcomplete ==0);
 
 		//아이디는 학색의 학번으로 숫자 7자리를 사용한다.
