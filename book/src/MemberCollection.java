@@ -21,7 +21,7 @@ class MemberCollection{
 		this.memberCount=memberCount;
 	}
 	
-	public void addmem(Member m) throws IOException, ClassNotFoundException{
+	public int addmem(Member m) throws IOException, ClassNotFoundException{
 
 		try{
 		@SuppressWarnings("resource")
@@ -47,6 +47,8 @@ class MemberCollection{
 		oos.writeObject(collectionm.elementAt(i));
 		}
 		System.out.println("회원가입 완료!");
+		
+		return 1;
 	}
 
 	public int getequal(String id) throws Exception{

@@ -31,7 +31,7 @@ class BookCollection{
 		this.bookCount=bookCount;
 	}
 
-	public void addbook(Book b) throws IOException, ClassNotFoundException{
+	public int addbook(Book b) throws IOException, ClassNotFoundException{
 
 		try{
 			@SuppressWarnings("resource")
@@ -57,6 +57,7 @@ class BookCollection{
 		}
 		System.out.println("도서 등록 완료!");
 
+		return 1;
 	}
 
 
@@ -221,12 +222,12 @@ class BookCollection{
 					System.out.println("ISBN은 4자리로 입력해주세요.(1000~9999)");
 				}
 				else{
-				if (getequalISBN(updateISBN) == 1) {
-					System.out.println("이미 등록된 ISBN이므로 업데이트할 수 없습니다.");
-				} else {
-					updatebook.setISBN(updateISBN);
-					inputcompleteup = 1;
-				}
+					if (getequalISBN(updateISBN) == 1) {
+						System.out.println("이미 등록된 ISBN이므로 업데이트할 수 없습니다.");
+					} else {
+						updatebook.setISBN(updateISBN);
+						inputcompleteup = 1;
+					}
 				}
 			} while (inputcompleteup == 0);
 			break;
@@ -256,13 +257,13 @@ class BookCollection{
 		return updatebook;
 	}
 
-	public void delete(Book deletebook) throws ClassNotFoundException{
-		
+	public int delete(Book deletebook) throws ClassNotFoundException{
+
 		collectionb.removeElement(deletebook);
 		int booknum = this.getBookCount();
 		booknum--;
 		this.setBookCount(booknum);
-		
+
 		try{
 			ObjectOutputStream oob = new ObjectOutputStream(new FileOutputStream("bookcollection.txt"));
 			oob.writeInt(this.getBookCount());
@@ -273,6 +274,8 @@ class BookCollection{
 		}catch(IOException e){
 		}
 		System.out.println("도서 삭제 완료!");
+		
+		return 1;
 	}
 
 	//
@@ -344,17 +347,19 @@ class BookCollection{
 		return null;
 
 	}
-	public void savenow(){
-		
-	try{
-		ObjectOutputStream oob = new ObjectOutputStream(new FileOutputStream("bookcollection.txt"));
-		oob.writeInt(this.getBookCount());
-		for(int i = 0; i<this.getBookCount() ; i++){
-			oob.writeObject(collectionb.elementAt(i));
+	public int savenow(){
+
+		try{
+			ObjectOutputStream oob = new ObjectOutputStream(new FileOutputStream("bookcollection.txt"));
+			oob.writeInt(this.getBookCount());
+			for(int i = 0; i<this.getBookCount() ; i++){
+				oob.writeObject(collectionb.elementAt(i));
+			}
+			oob.close();
+		}catch(IOException e){
+			//파일이 존재하지않을땐 그냥 넘어가도록한다. 파일내에 도서정보가 없다는 의미이므로..
 		}
-		oob.close();
-	}catch(IOException e){
-	}
+		return 1;
 	}
 	//검색단어를입력하지않고Enter키누르는경우
 	//검색어를입력하지않았습니다. 다시입력해주십시오. 메시지출력

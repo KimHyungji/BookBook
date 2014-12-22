@@ -128,7 +128,7 @@ public class bookmain{
 
 			//아이디는 7자리 숫자이어야 한다.메시지출력하기
 			do{
-				if(newID.length() < 7)
+				if(newID.length() != 7)
 				{
 					System.out.println("자신의 7자리 숫자 학번을 입력해주세요.");
 					System.out.print("학생 아이디(학번):");
@@ -222,7 +222,6 @@ public class bookmain{
 	public void the_end(){
 		System.exit(-1);
 		//더 이상의 메뉴를 출력시키지 않는다.
-
 	}
 
 	////////////////////////////////////////////////////////////////////////
@@ -292,7 +291,7 @@ public class bookmain{
 		do{
 			System.out.print("ISBN:");
 			newISBN = scan.nextInt();
-			if(newISBN < 1000){
+			if(newISBN < 1000 || newISBN >=10000){
 				System.out.println("ISBN을 4자리로 입력해주세요");
 			}else{
 				if(bookcollect.getequalISBN(newISBN)==1){
@@ -308,7 +307,7 @@ public class bookmain{
 		inputcomplete2 = 0;
 		String newavail;
 		do{
-			System.out.print("대출 여부(o/x):");
+			System.out.print("대출 여부(O/X):");
 			scan.nextLine();
 			newavail = scan.nextLine();
 			newbook.setavail(newavail);
@@ -320,12 +319,16 @@ public class bookmain{
 		do{
 			System.out.print("대여자:");
 			newborrower = scan.nextLine();
-			if(newborrower.length() <7){
+			if(newavail.equals("O")){
+			if(newborrower.length() != 7){
 				System.out.println("대여자를 7자리학번으로 입력해주세요");
 			}else{
 				newbook.setborrower(newborrower);
 				inputcomplete2 = 1;
 			}
+			}
+			else
+				inputcomplete2 =1;
 		}while(inputcomplete2 == 0);
 
 		bookcollect.addbook(newbook);
