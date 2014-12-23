@@ -71,15 +71,16 @@ public class booktest {
 		membercollectm.getequal2("1123158","00000000");
 
 		try{
+			int count =0;
 			@SuppressWarnings("resource")
 			ObjectInputStream osi = new ObjectInputStream(new FileInputStream("membercollectiontest.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
 			membercollectm.setMemberCount(osi.readInt());
 			for( int i= 0; i< membercollectm.getMemberCount();i++){
 				Member ms = (Member)osi.readObject();
 				if(ms.ID.equals("1123158") && ms.password.equals("00000000"))
-					assertTrue(true);
+					count++;
 			}
-			assertTrue(false);
+			assertTrue(count == 1);
 		}catch(Exception e){
 		}
 	}
@@ -103,7 +104,7 @@ public class booktest {
 	@Test
 	public void addmemtest() throws ClassNotFoundException, IOException{
 		Member newmem2 = new Member("1234123","1234123","김소공","컴퓨터과학과");
-		
+
 		membercollectm.addmem(newmem2);
 		int endnum =0;
 		try{
@@ -156,14 +157,15 @@ public class booktest {
 			for( int i= 0; i< osb.readInt();i++){
 				Book bs = (Book)osb.readObject();
 				if((endnum-1) == i){
-					if(bs.title.equals("비밀의정원") && bs.author.equals("조해너배스포드") && bs.publish.equals("퍼블리싱컴퍼니") && (bs.ISBN==6656) && bs.avail.equals("X") && bs.borrower.equals(""));
-					assertTrue(true);
+					if(bs.title.equals("비밀의정원") && bs.author.equals("조해너배스포드") && bs.publish.equals("퍼블리싱컴퍼니") && (bs.ISBN==6656) && bs.avail.equals("X") && bs.borrower.equals(""))
+						assertTrue(true);
 				}
 			}
 			assertTrue(false);
 		}catch(Exception e){
 		}
 		assertEquals(endnum, bookcollectb.bookCount);
+		assertEquals("비밀의정원", bookcollectb.collectionb.elementAt(endnum-1).title);
 	}
 	@Test
 	public void getequal2titletest() throws Exception{
@@ -188,7 +190,6 @@ public class booktest {
 	public void findmybooktest(){
 		try {
 			bookcollectb.findmybook("1315698");
-			@SuppressWarnings("resource")
 			ObjectInputStream osi = new ObjectInputStream(new FileInputStream("bookcollectiontest.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
 			bookcollectb.setBookCount(osi.readInt());
 			for( int i= 0; i< bookcollectb.getBookCount();i++){
@@ -208,39 +209,35 @@ public class booktest {
 
 		try{
 			bookcollectb.searchISBNbook(1315);
-
-			@SuppressWarnings("resource")
+			int count =0;
 			ObjectInputStream osi = new ObjectInputStream(new FileInputStream("bookcollectiontest.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
 			bookcollectb.setBookCount(osi.readInt());
 			for( int i= 0; i< bookcollectb.getBookCount();i++){
 				Book ms = (Book)osi.readObject();
-
 				if(ms.ISBN == 1315) //존재하는 ISBN(1315)를 넣었을 경우
-
-					assertTrue(true);
+					count++;
 
 			}
-			assertTrue(false);
+			assertTrue(count ==1);
 		} catch (Exception e) {
 		}   
 	}
-	@Test//존재하지않는 IBSN을 입력했을 경우 오류메세지가 출력하는지 확인하기
+	@Test
 	public void printtest(){
 
 		bookcollectb.print(1316);
 		try{
-			@SuppressWarnings("resource")
+			int count=0;
 			ObjectInputStream osib = new ObjectInputStream(new FileInputStream("bookcollectiontest.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
 			bookcollectb.setBookCount(osib.readInt());
 			for( int i= 0; i< bookcollectb.getBookCount();i++){
 				Book ms = (Book)osib.readObject();
-				if(ms.ISBN != 1316) //존재하지않는 ISBN(1316)를 넣었을 경우
-					assertTrue(true);  
+				if(ms.ISBN == 1316) //존재하지않는 ISBN(1316)를 넣었을 경우
+					count =1;  
 			}
-			assertTrue(false);
+			assertTrue(count == 0);
 		} catch (Exception e) {
 		}      
-
 	}
 
 	@Test
@@ -248,16 +245,13 @@ public class booktest {
 
 		String result =book2.title+'\t'+book2.author+ '\t'+book2.publish+'\t'+book2.ISBN+'\t'+book2.avail
 				+'\t'+book2.borrower;
-		if(result.equals(book2.toString()))
-			assertTrue(true);
-		else
-			assertTrue(false);
+		assertTrue(result.equals(book2.toString()));
 
 	}
 
 	@Test
 	public void deletetest() throws Exception{
-
+		int count =0;
 		bookcollectb.delete(book1);
 		try{
 			ObjectInputStream osi = new ObjectInputStream(new FileInputStream("bookcollectiontest.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
@@ -265,17 +259,16 @@ public class booktest {
 			bookcollectb.collectionb.clear();
 			for( int i= 0; i< bookcollectb.getBookCount();i++){
 				Book bk = (Book)osi.readObject();
-				if(bk.title.equals("센트럴파크"))
-					assertTrue(false);
+				if(bk.title.equals("센트럴파크") == true)
+					count++;
 			}
-			assertTrue(true);
+			assertTrue(count == bookcollectb.getBookCount());
 		}catch(Exception e){
 		}
 	}
 
 	@Test
-	public void savenowtest() throws ClassNotFoundException{
-		//파일에 내용이 잘 저장되는지 테스트
+	public void savenowtest() throws ClassNotFoundException, IOException{
 
 		try{
 			@SuppressWarnings("resource")
@@ -287,26 +280,19 @@ public class booktest {
 				bookcollectb.collectionb.add(i,ms);
 			}
 		}catch(IOException e){
-			System.out.println("파일없어서 새로생성함");
 		}
 
 		bookcollectb.savenow();
 
-		int count =0;
-		try{
-			@SuppressWarnings("resource")
-			ObjectInputStream osb = new ObjectInputStream(new FileInputStream("bookcollection.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
-			int endnnum = osb.readInt();
-			for( int i= 0; i< endnnum;i++){
-				Book ms = (Book)osb.readObject();
-				if(bookcollectb.collectionb.elementAt(i).equals(ms) == true)
-					assertTrue(false);
-			}
-			assertTrue(true);
+		int count=0;
+		ObjectInputStream osb = new ObjectInputStream(new FileInputStream("bookcollection.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
+		int endnnum = osb.readInt();
 
-		}catch(IOException e){
-			System.out.println("파일없어서 새로생성함");
+		for( int i= 0; i< endnnum;i++){
+			Book ms = (Book)osb.readObject();
+			if(bookcollectb.collectionb.elementAt(i).equals(ms) != true)
+				count++;
 		}
+		assertTrue(endnnum == count);
 	}
-
 }
