@@ -43,6 +43,7 @@ class Book implements Serializable{
 		borrower = newborrower;
 	}
 
+	//파일에 저장되어 있는 title, author, publisher, ISBN, avail, borrower를 출력함	
 public String toString(){
 		
 	String description ="";

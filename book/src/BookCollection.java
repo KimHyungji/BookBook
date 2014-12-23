@@ -31,6 +31,7 @@ class BookCollection{
 		this.bookCount=bookCount;
 	}
 
+	//사서가 1.도서등록을 하는 부분
 	public int addbook(Book b) throws IOException, ClassNotFoundException{
 
 		try{
@@ -60,7 +61,7 @@ class BookCollection{
 		return 1;
 	}
 
-
+	//학생이 도서검색을 할때, 파일에 저장되어 있는 도서의 title과 입력받은 title이 같은지 비교하는 부분
 	public int getequal2(String newtitle) {
 		try{
 
@@ -84,6 +85,7 @@ class BookCollection{
 
 	}
 
+	//학생이 도서검색을 할때, 파일에 저장되어 있는 도서의 title과 입력받은 title이 같은지 비교하고 같으면 출력함수를 부르는 부분
 	public void print(String newtitle) {
 		try{
 
@@ -109,6 +111,7 @@ class BookCollection{
 
 	}
 
+	// 파일에 저장되어 있는 도서의 ISBN과 입력받은 ISBN이 같은지 비교하고 같으면 출력함수(toString())를 부르는 부분
 	public Book print(int ISBN) {
 		try{
 
@@ -135,7 +138,7 @@ class BookCollection{
 		return null;
 	}
 
-
+	// 파일에 저장되어 있는 도서의 ISBN과 입력받은 ISBN이 같은지 비교하는 부분
 	public int getequalISBN(int newISBN) throws Exception{
 
 		try{
@@ -157,6 +160,7 @@ class BookCollection{
 		}
 	}
 
+	//학생의 '나의대여정보'메뉴를 눌렀을 때 파일에 저장되어 있는 ID와 입력받은 ID가 같은지 비교하고 같으면 출력함수(toString())를 부르는 부분
 	public int findmybook(String findID) throws ClassNotFoundException{
 
 		try{
@@ -185,6 +189,7 @@ class BookCollection{
 		return -1;
 	}
 
+	//사서의 '도서업데이트'항목에서 업데이트할 항목을 선택하는 부분
 	public Book updatefield(int field, Book findbook) throws Exception {
 		int inputcompleteup=0;
 		Scanner scan = new Scanner(System.in);
@@ -257,6 +262,7 @@ class BookCollection{
 		return updatebook;
 	}
 
+	//사서의'도서삭제'메뉴에서 도서를 삭제하는 부분
 	public int delete(Book deletebook) throws ClassNotFoundException{
 
 		collectionb.removeElement(deletebook);
@@ -278,7 +284,7 @@ class BookCollection{
 		return 1;
 	}
 
-	//
+	//사서가 업데이트,삭제를 하기 위해서 그 전에 ISBN으로 검색할 도서를 선택하는 부분
 	public Book search_ISBN() throws Exception{ 
 		int ISBN=0;
 		int x=1;      
@@ -291,6 +297,7 @@ class BookCollection{
 		return ISBNmatching;
 	}
 
+	 //사서가 업데이트,삭제를 하기 위해서 그 전에 ISBN으로 검색할 도서를 선택하는 부분
 	public Book searchISBNbook(int ISBN) throws Exception{
 		Book ISBNmatching;
 
@@ -306,6 +313,7 @@ class BookCollection{
 		}
 	}
 	
+	 //사서가 업데이트,삭제를 하기 위해서 그 전에 제목,ISBN으로 검색할 도서를 선택하는 부분
 	public Book book_search_lib() throws Exception{ 
 		int choice=0, y=0;
 		//도서정보명단에있는도서들의제목과비교
@@ -354,6 +362,8 @@ class BookCollection{
 		return null;
 
 	}
+	
+	 //업데이트한 내용을 다시 저장하는 부분
 	public int savenow(){
 
 		try{
@@ -368,10 +378,6 @@ class BookCollection{
 		}
 		return 1;
 	}
-	//검색단어를입력하지않고Enter키누르는경우
-	//검색어를입력하지않았습니다. 다시입력해주십시오. 메시지출력
-
-	//도서검색결과없는경우
-	//검색어와일치하는결과가없습니다. 메시지출력
+	
 
 }
