@@ -11,7 +11,7 @@ class Book implements Serializable{
 	public String avail;
 	public String borrower;
 	
-	/*public Book(String title, String author, String publish, int ISBN, String avail,String borrower)
+	public Book(String title, String author, String publish, int ISBN, String avail,String borrower)
 	{
 		this.title=title;
 		this.author = author;
@@ -19,8 +19,11 @@ class Book implements Serializable{
 		this.ISBN = ISBN;
 		this.avail = avail;
 		this.borrower = borrower;
-	}*/
-
+	}
+	public Book(){
+		
+	}
+	
 	public void settitle(String newtitle){
 		title = newtitle;
 	}

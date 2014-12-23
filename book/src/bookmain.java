@@ -147,7 +147,7 @@ public class bookmain{
 				newmem.setID(newID);
 				inputcomplete =1;
 			}
-			
+
 		}while(inputcomplete ==0);
 
 		//아이디는 학색의 학번으로 숫자 7자리를 사용한다.
@@ -320,12 +320,12 @@ public class bookmain{
 			System.out.print("대여자:");
 			newborrower = scan.nextLine();
 			if(newavail.equals("O")){
-			if(newborrower.length() != 7){
-				System.out.println("대여자를 7자리학번으로 입력해주세요");
-			}else{
-				newbook.setborrower(newborrower);
-				inputcomplete2 = 1;
-			}
+				if(newborrower.length() != 7){
+					System.out.println("대여자를 7자리학번으로 입력해주세요");
+				}else{
+					newbook.setborrower(newborrower);
+					inputcomplete2 = 1;
+				}
 			}
 			else
 				inputcomplete2 =1;
@@ -428,10 +428,10 @@ public class bookmain{
 
 		switch(stu_menu){
 		case 1:
-			book_search();
+			book_search(loginmem);
 			break;
 		case 2:
-			book_borrowinfo(loginmem.ID);
+			book_borrowinfo(loginmem);
 			break;
 		case 3:
 			stu_logout(loginmem);
@@ -441,7 +441,7 @@ public class bookmain{
 	}
 	//도서검색
 
-	public void book_search() throws Exception{
+	public void book_search(Member loginmem) throws Exception{
 		//  System.out.println("***********************************");
 		//System.out.println("제목: ");
 		//scan.nextLine(); 
@@ -451,8 +451,7 @@ public class bookmain{
 		BookCollection newbook1 = new  BookCollection();
 		Book newbook = new Book();
 		String newtitle;
-				Member loginmem = null;
-				int ch=0;
+		int ch=0;
 		do{
 			System.out.println("*******************************************************************");
 			System.out.print("제목:");
@@ -499,13 +498,15 @@ public class bookmain{
 
 	}
 	//대여목록
-	public void book_borrowinfo(String findID) throws Exception{
+	public void book_borrowinfo(Member loginmem) throws Exception{
 		//도서 정보 명단의 대여자 중, 자신의 계정 아이디와 일치하는 도서들의 항목들을 출력시킨다.
 		//나의 도서대여 목록이 존재하지 않는다면 
 		//대여 중인 도서가 없습니다.메시지 출력
-		if(bookcollect.findmybook(findID) == -1){
+		if(bookcollect.findmybook(loginmem.ID) == -1){
 			System.out.println("대여중인 도서가 없습니다.");
-		}
+			student_menu(loginmem);
+		}else
+			student_menu(loginmem);
 	}
 	//로그아웃
 	public void stu_logout(Member loginmem) throws Exception{

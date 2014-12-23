@@ -27,10 +27,10 @@ class MemberCollection{
 		@SuppressWarnings("resource")
 		ObjectInputStream osi = new ObjectInputStream(new FileInputStream("membercollection.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
 		this.setMemberCount(osi.readInt());
-		collectionm.clear();
+		this.collectionm.clear();
 		for( int i= 0; i< this.getMemberCount();i++){
 			Member ms = (Member)osi.readObject();
-			collectionm.add(i,ms);
+			this.collectionm.add(i,ms);
 		}
 		}catch(IOException e){
 			System.out.println("파일없어서 새로생성함");
@@ -38,14 +38,16 @@ class MemberCollection{
 		
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("membercollection.txt"));
 		//oos.close();
-		collectionm.add(m);
-		memberCount++;
-		this.setMemberCount(memberCount);
+		int count = this.getMemberCount();
+		System.out.println("파일안에 :"+count);
+		this.setMemberCount(++count);
+		this.collectionm.add(m);
 		
 		oos.writeInt(this.getMemberCount());
 		for(int i = 0; i<this.getMemberCount() ; i++){
-		oos.writeObject(collectionm.elementAt(i));
+		oos.writeObject(this.collectionm.elementAt(i));
 		}
+		System.out.println(this.getMemberCount());
 		System.out.println("회원가입 완료!");
 		
 		return 1;

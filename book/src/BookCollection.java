@@ -285,6 +285,13 @@ class BookCollection{
 		Scanner scan = new Scanner(System.in);
 		System.out.print("검색할 도서의 ISBN을 선택하세요  : ");
 		ISBN = scan.nextInt();
+		
+		Book ISBNmatching =searchISBNbook(ISBN);
+		
+		return ISBNmatching;
+	}
+
+	public Book searchISBNbook(int ISBN) throws Exception{
 		Book ISBNmatching;
 
 		if(getequalISBN(ISBN)==1)
@@ -298,7 +305,7 @@ class BookCollection{
 			return null;
 		}
 	}
-
+	
 	public Book book_search_lib() throws Exception{ 
 		int choice=0, y=0;
 		//도서정보명단에있는도서들의제목과비교

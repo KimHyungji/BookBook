@@ -9,14 +9,16 @@ class Member implements Serializable{
 	public String name;
 	public String major;
 
-	/*public Member(int ID,String password,String name, String major)
+	public Member(String ID,String password,String name, String major)
 	{
 		this.ID = ID;
 		this.password = password;
 		this.name = name;
 		this.major = major;
 	}
-	*/
+	public Member(){
+		
+	}
 	
 	public void setID(String newID){
 		ID = newID;
