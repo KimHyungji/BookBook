@@ -32,6 +32,7 @@ public class bookmain{
 		Scanner scan = new Scanner(System.in);
 		bookmain start = new bookmain();
 		start.show_menu();
+		//초기화면showmenu를 불러준다.
 	}
 	//초기화면 
 	public void show_menu() throws Exception{
@@ -47,12 +48,15 @@ public class bookmain{
 		switch(menu){
 		case 1:
 			login();
+			//로그인
 			break;
 		case 2:
 			join();
+			//회원가입
 			break;
 		case 3:
 			the_end();
+			//종료
 			break;
 		}
 	}
@@ -69,16 +73,16 @@ public class bookmain{
 			id = scan.next();
 			//사서의 경우 사서의 아이디는 123으로 지정
 
-			if((id.equals("0000123")) == TRUE){
+			if((id.equals("0000123")) == TRUE){ //입력한 id와 0000123(사서의 ID)와 일치하지않는다면
 
-				if(membercollect.getequal(id)==-1){
+				if(membercollect.getequal(id)==-1){ //id중복확인
 					System.out.println("존재하지 않는 아이디입니다.");
 					loginputcomplete =1;
 				}				
-				else
+				else //존재하는 아이디라면 비밀번호입력으로 넘어가게해준다.
 					loginputcomplete = 0;
 			}
-			else
+			else //0000123을 id로 입력했을시에도 비밀번호 입력으로 그냥넘어가게해준다.
 				loginputcomplete =0;
 
 		}while(loginputcomplete ==1);
@@ -87,13 +91,13 @@ public class bookmain{
 		scan.nextLine(); 
 		String password = scan.next();
 
-		//사서의경우비밀번호rootpass로지정
+		//사서의경우 id는 0000123이고 비밀번호는 rootpass로지정
 		if((id.equals("0000123") !=TRUE) && (password.equals("rootpass")))
 		{
 			//사서메뉴출력
 			librarian_menu();
 		}
-		else if(membercollect.getequal2(id,password)==1){
+		else if(membercollect.getequal2(id,password)==1){ //id와 패스워드 일치한다면
 			loginmem.ID =id;
 			loginmem.password =password;
 			System.out.println("로그인되었습니다.");
@@ -101,16 +105,11 @@ public class bookmain{
 		}
 		else
 		{
-			//‘로그인에실패하였습니다. 아이디와패스워드를다시입력해주세요.’메시지출력
+			//로그인에실패한경우
 			System.out.println("로그인에실패하였습니다. 아이디와패스워드를다시입력해주세요.");
 			//다시로그인화면
 			show_menu();
 		}
-
-
-		//학생의 경우 비밀번호가 파일에 있으면 ‘로그인 되었습니다.’라는 메시지를 출력
-		//학생 메뉴 출력 
-
 	}
 	////////////////////////////////////////////////////////////////////////
 	//회원가입
@@ -137,8 +136,9 @@ public class bookmain{
 				else
 					inputcomplete =1;
 			}while(inputcomplete ==0);
-			//
+			//아이디입력이 끝난후 중복확인
 			inputcomplete = 0;
+			//입력한id가 이미있는 id거나 사서의id인 0000123인 경우
 			if((membercollect.getequal(newID)==1) || (newID.equals("0000123") != TRUE)){
 				System.out.println("이미 사용중인 아이디입니다.");
 			}
@@ -150,18 +150,15 @@ public class bookmain{
 
 		}while(inputcomplete ==0);
 
-		//아이디는 학색의 학번으로 숫자 7자리를 사용한다.
-		//아이디가 이미 존재한다면 아이디라면 ‘이미 사용하고 있는 아이디입니다.’ 메시지 출력
 		inputcomplete = 0;
 		String newpassword;
 		do{
 			System.out.print("패스워드:");
 			scan.nextLine(); 
 			newpassword = scan.next();
-			//비밀먼호는 문자,숫자,기호 제한X
-			//사용자가 패스워드에 8자 미만을 입력하였다면 
+
 			if(newpassword.length() < 8)
-				//‘8자 이상의 패스워드를 입력해주세요.’ 메시지 출력
+				//8자 이상의 패스워드를 입력해야한다.
 				System.out.println("8자 이상의 패스워드를 입력해주세요.");
 			else
 				inputcomplete = 1;
@@ -179,8 +176,6 @@ public class bookmain{
 			}
 			else
 				//두 내용이 일치하지 않을 경우 않는다면 
-
-				//‘패스워드가 일치하지 않습니다. 다시 확인하고 입력해주세요.’ 메시지 출력
 				System.out.println("패스워드가 일치하지 않습니다. 다시 확인하고 입력해주세요.");
 		}while(inputcomplete ==0);
 
@@ -202,7 +197,6 @@ public class bookmain{
 			System.out.print("학과:");
 			String newmajor = scan.next();
 			//학과 입력은 두 자 이상이어야 한다.
-			//두 글자 미만으로 입력되었을 경우, ‘두 글자 이상 입력해주세요.’
 			if(newmajor.length() < 2)
 				System.out.println("두 글자 이상 입력해주세요.");
 			else{
@@ -239,16 +233,16 @@ public class bookmain{
 
 		switch(lib_menu){
 		case 1:
-			book_register();
+			book_register();//도서등록
 			break;
 		case 2:
-			book_update();
+			book_update(); //도서정보 업데이트
 			break;
 		case 3:
-			book_delete();
+			book_delete(); //도서 삭제
 			break;
 		case 4:
-			logout();
+			logout(); //로그아웃
 			break;
 		}
 	}
@@ -292,8 +286,9 @@ public class bookmain{
 			System.out.print("ISBN:");
 			newISBN = scan.nextInt();
 			if(newISBN < 1000 || newISBN >=10000){
-				System.out.println("ISBN을 4자리로 입력해주세요");
+				System.out.println("ISBN은 4자리로 입력해주세요.(1000~9999)");
 			}else{
+				//newISBN과 중복되는 ISBN을 가진 도서가 이미 등록되었다면
 				if(bookcollect.getequalISBN(newISBN)==1){
 					System.out.println("이미 등록된 ISBN입니다.");
 				}
@@ -339,28 +334,26 @@ public class bookmain{
 	//도서 업데이트
 	public void book_update() throws Exception{
 		int field = 0, updatecomplete =1;
-		//Scanner scan = new Scanner(System.in);
 		Book findbook = bookcollect.book_search_lib();
-
+		//제목 혹은 ISBN으로 검색한 결과의 책을 findbook이라는 Book객체로 리턴받는다.
 		if (findbook == null){
-			librarian_menu();
-		}else{
+			librarian_menu(); //검색결과의 책이없다면 사서의메뉴로돌아간다.
+		}else{ //업데이트하고자 한 도서에대해 업데이트할 항목을 입력받는다.
 			do{
-				System.out.println("업데이트 할 항목의 번호를 선택해주세요.\n 1. 제목 \n2. 저자 \n3. 출판사 \n4. ISBN \n5. 대출 여부 \n6. 대여자");
+				System.out.println("업데이트 할 항목의 번호를 선택해주세요.\n1. 제목 \n2. 저자 \n3. 출판사 \n4. ISBN \n5. 대출 여부 \n6. 대여자\n입력 :");
 				field = scan.nextInt();
-
+				//업데이트할 항목과 업데이트할 Book객체를 함수에 넘겨준다.
 				findbook=bookcollect.updatefield(field, findbook);
-
-				//System.out.println(findbook.title);
+				//업데이트 후의 findbook을 리턴받는다.
 				System.out.println("제목"+'\t'+ "지은이"+ '\t'+"출판사"+'\t'+"ISBN"+'\t'+"대출여부"+'\t'+"대여자");	
-				System.out.println("**********************************************************");
+				System.out.println("*******************************************************************");
 				System.out.println(findbook.toString());
 				bookcollect.savenow();
-
+				//업데이트 후의 도서정보를 출력해준후 파일에 저장한다.
 				System.out.println("해당 도서에 대한 업데이트를 계속 하시겠습니까?(Y/N)");
 				scan.nextLine();
 				String updatecheck = scan.nextLine();
-
+				// 해당 도서에 대한 업데이트를 계속한다면 되풀이되도록 한다.
 				if (updatecheck.equals("Y")) {
 					updatecomplete =1;
 				} 
@@ -370,17 +363,12 @@ public class bookmain{
 				}
 			}while(updatecomplete ==1);
 		}
-
-
 	}
 	//도서 삭제
 	public void book_delete() throws Exception{
-		//정말 삭제하시겠습니까(Y/N)? 라는 메시지 출력
-		//삭제하겠다면 ‘Y’라고 입력하고 삭제하지 않으려면 ‘N’
-		//도서 삭제를 완료 하였다면 ‘도서 삭제 완료!’라는 메시지와 함께 사서의 메뉴화면으로 넘어간다.
-		//입력한 값이 ‘N’인 경우 사서의 메뉴화면 출력
-		Book deletebook = bookcollect.book_search_lib(); 
 
+		Book deletebook = bookcollect.book_search_lib(); 
+		//삭제할 도서를 검색한다.
 		System.out.println("정말 삭제하시겠습니까?(Y/N)");
 		scan.nextLine();
 
@@ -396,23 +384,16 @@ public class bookmain{
 	}
 	//로그아웃
 	public void logout() throws Exception{
-		//로그아웃 하시겠습니까?(Y/N) 메시지 출력
 		System.out.println("로그아웃 하시겠습니까?(Y/N)");
 		scan.nextLine();
-		String logoutcheck = scan.nextLine();//N이면 (로그인/회원가입/종료) 화면
-
+		String logoutcheck = scan.nextLine();
 		//사서메뉴 출력
 		if(logoutcheck.equals("Y"))
 		{
-			show_menu();
+			show_menu();//초기화면으로 넘어간다.
 		}
 		else if(logoutcheck.equals("N"))
 			librarian_menu();
-
-
-		//Y이면 사서는 사서의 메뉴
-		//로그아웃을 하지 않고 프로그램을 강제로 끄게 되는 경우
-		//해당 계정이 변경한 내용이 자동으로 저장되며 로그아웃된다.
 	}
 	////////////////////////////////////////////////////////////////////////
 	//학생의 메뉴
@@ -437,17 +418,11 @@ public class bookmain{
 			stu_logout(loginmem);
 			break;
 		}
-
 	}
 	//도서검색
-
 	public void book_search(Member loginmem) throws Exception{
-		//  System.out.println("***********************************");
-		//System.out.println("제목: ");
-		//scan.nextLine(); 
 		int a=0;
-		//도서정보명단에있는도서들의제목과비교
-		//입력한단어가포함된모든도서의정보를출력
+		//도서정보명단에있는도서들의제목과비교 & 입력한단어가포함된모든도서의정보를출력
 		BookCollection newbook1 = new  BookCollection();
 		Book newbook = new Book();
 		String newtitle;
@@ -455,13 +430,10 @@ public class bookmain{
 		do{
 			System.out.println("*******************************************************************");
 			System.out.print("제목:");
-			//scan.next(); 
 			newtitle = scan.next();
 
 			ch = newtitle.toCharArray()[0];
-			//ch=newtitle.charAt(0);
 			if(bookcollect.getequal2(newtitle)==1){      
-
 				a=1;
 				bookcollect.print(newtitle);
 				System.out.println("*******************************************************************");
@@ -490,18 +462,12 @@ public class bookmain{
 			student_menu(loginmem);
 
 		}
-
 		//검색단어를입력하지않고Enter키누르는경우
 		//검색어를입력하지않았습니다. 다시입력해주십시오. 메시지출력
-
-
-
 	}
-	//대여목록
+	//도서 정보 명단의 대여자 중, 자신의 계정 아이디와 일치하는 도서들의 항목들을 출력시킨다.
 	public void book_borrowinfo(Member loginmem) throws Exception{
-		//도서 정보 명단의 대여자 중, 자신의 계정 아이디와 일치하는 도서들의 항목들을 출력시킨다.
 		//나의 도서대여 목록이 존재하지 않는다면 
-		//대여 중인 도서가 없습니다.메시지 출력
 		if(bookcollect.findmybook(loginmem.ID) == -1){
 			System.out.println("대여중인 도서가 없습니다.");
 			student_menu(loginmem);
@@ -510,21 +476,16 @@ public class bookmain{
 	}
 	//로그아웃
 	public void stu_logout(Member loginmem) throws Exception{
-		//로그아웃 하시겠습니까?(Y/N) 메시지 출력
 		System.out.println("로그아웃 하시겠습니까?(Y/N)");
 		scan.nextLine();
 		String logout = scan.nextLine();
-		//N이면 (로그인/회원가입/종료) 화면
 		if(logout.equals("Y"))
 		{
-			show_menu();
+			show_menu(); //로그아웃후 초기화면으로 돌아간다.
 		}
-		//Y이면 사서는 사서의 메뉴로 학생은 학생의 메뉴로
 		else if(logout.equals("N"))
 		{
 			student_menu(loginmem);
 		}
-		//로그아웃을 하지 않고 프로그램을 강제로 끄게 되는 경우
-		//해당 계정이 변경한 내용이 자동으로 저장되며 로그아웃된다.
 	}
 }

@@ -10,7 +10,7 @@ class Book implements Serializable{
 	public int ISBN;
 	public String avail;
 	public String borrower;
-	
+
 	public Book(String title, String author, String publish, int ISBN, String avail,String borrower)
 	{
 		this.title=title;
@@ -21,9 +21,9 @@ class Book implements Serializable{
 		this.borrower = borrower;
 	}
 	public Book(){
-		
+
 	}
-	
+
 	public void settitle(String newtitle){
 		title = newtitle;
 	}
@@ -44,14 +44,14 @@ class Book implements Serializable{
 	}
 
 	//파일에 저장되어 있는 title, author, publisher, ISBN, avail, borrower를 출력함	
-public String toString(){
-		
-	String description ="";
-	description+=this.title+'\t'+ this.author+ '\t'+this.publish+'\t'+this.ISBN+'\t'+this.avail
-	+'\t'+this.borrower;
-	
+	public String toString(){
+
+		String description ="";
+		description+=this.title+'\t'+ this.author+ '\t'+this.publish+'\t'+this.ISBN+'\t'+this.avail
+				+'\t'+this.borrower;
+
 		return description;
 	}
-	
+
 }
 

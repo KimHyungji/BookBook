@@ -98,7 +98,7 @@ class BookCollection{
 				collectionb.add(i,ms);
 			}		
 			System.out.println("제목"+'\t'+ "지은이"+ '\t'+"출판사"+'\t'+"ISBN"+'\t'+"대출여부"+'\t'+"대여자");	
-			System.out.println("**********************************************************");
+			System.out.println("*******************************************************************");
 			for(i = 0; i<this.getBookCount() ; i++){
 				if((collectionb.elementAt(i).title).indexOf(newtitle)>=0)
 				{	
@@ -124,7 +124,7 @@ class BookCollection{
 				collectionb.add(i,ms);
 			}		
 			System.out.println("제목"+'\t'+ "지은이"+ '\t'+"출판사"+'\t'+"ISBN"+'\t'+"대출여부"+'\t'+"대여자");	
-			System.out.println("**********************************************************");
+			System.out.println("*******************************************************************");
 			for(i = 0; i<this.getBookCount() ; i++){
 				if((collectionb.elementAt(i).ISBN)==ISBN)
 				{	
@@ -170,7 +170,7 @@ class BookCollection{
 			this.setBookCount(osb.readInt());
 			collectionb.clear();
 			System.out.println("제목"+'\t'+ "지은이"+ '\t'+"출판사"+'\t'+"ISBN"+'\t'+"대출여부"+'\t'+"대여자");	
-			System.out.println("**********************************************************");
+			System.out.println("*******************************************************************");
 			for( int i= 0; i< this.getBookCount();i++){
 				Book ms = (Book)osb.readObject();
 				collectionb.add(i,ms);
@@ -280,7 +280,7 @@ class BookCollection{
 		}catch(IOException e){
 		}
 		System.out.println("도서 삭제 완료!");
-		
+
 		return 1;
 	}
 
@@ -291,13 +291,13 @@ class BookCollection{
 		Scanner scan = new Scanner(System.in);
 		System.out.print("검색할 도서의 ISBN을 선택하세요  : ");
 		ISBN = scan.nextInt();
-		
+
 		Book ISBNmatching =searchISBNbook(ISBN);
-		
+
 		return ISBNmatching;
 	}
 
-	 //사서가 업데이트,삭제를 하기 위해서 그 전에 ISBN으로 검색할 도서를 선택하는 부분
+	//사서가 업데이트,삭제를 하기 위해서 그 전에 ISBN으로 검색할 도서를 선택하는 부분
 	public Book searchISBNbook(int ISBN) throws Exception{
 		Book ISBNmatching;
 
@@ -312,8 +312,8 @@ class BookCollection{
 			return null;
 		}
 	}
-	
-	 //사서가 업데이트,삭제를 하기 위해서 그 전에 제목,ISBN으로 검색할 도서를 선택하는 부분
+
+	//사서가 업데이트,삭제를 하기 위해서 그 전에 제목,ISBN으로 검색할 도서를 선택하는 부분
 	public Book book_search_lib() throws Exception{ 
 		int choice=0, y=0;
 		//도서정보명단에있는도서들의제목과비교
@@ -362,8 +362,8 @@ class BookCollection{
 		return null;
 
 	}
-	
-	 //업데이트한 내용을 다시 저장하는 부분
+
+	//업데이트한 내용을 다시 저장하는 부분
 	public int savenow(){
 
 		try{
@@ -378,6 +378,6 @@ class BookCollection{
 		}
 		return 1;
 	}
-	
+
 
 }

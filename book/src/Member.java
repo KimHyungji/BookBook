@@ -9,6 +9,7 @@ class Member implements Serializable{
 	public String name;
 	public String major;
 
+	//Member객체 생성해준다.booktest에서쓰임
 	public Member(String ID,String password,String name, String major)
 	{
 		this.ID = ID;
@@ -16,10 +17,10 @@ class Member implements Serializable{
 		this.name = name;
 		this.major = major;
 	}
-	public Member(){
-		
+	//bookmain에서 쓰이는 Member객체 생성
+	public Member(){	
 	}
-	
+
 	public void setID(String newID){
 		ID = newID;
 	}
@@ -33,6 +34,6 @@ class Member implements Serializable{
 		major = newmajor;
 	}
 
-	
+
 
 }
