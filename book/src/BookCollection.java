@@ -44,7 +44,6 @@ class BookCollection{
 				collectionb.add(i,ms);
 			}
 		}catch(IOException e){
-			System.out.println("파일없어서 새로생성함");
 		}
 
 		ObjectOutputStream oob = new ObjectOutputStream(new FileOutputStream("bookcollection.txt"));
@@ -184,7 +183,6 @@ class BookCollection{
 			}else
 				return -1;
 		}catch(IOException e){
-			System.out.println("파일없어서 새로생성함");
 		}
 		return -1;
 	}

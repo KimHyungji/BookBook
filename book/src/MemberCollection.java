@@ -33,7 +33,6 @@ class MemberCollection{
 				this.collectionm.add(i,ms);
 			}
 		}catch(IOException e){
-			System.out.println("파일없어서 새로생성함");
 		}
 		//기존의 membercollection.txt파일에서 객체를 읽어와 collecionm에 추가해준다.
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("membercollection.txt"));

@@ -422,44 +422,33 @@ public class bookmain{
 	//도서검색
 	public void book_search(Member loginmem) throws Exception{
 		int a=0;
-		//도서정보명단에있는도서들의제목과비교 & 입력한단어가포함된모든도서의정보를출력
-		BookCollection newbook1 = new  BookCollection();
-		Book newbook = new Book();
+		//도서정보명단에있는도서들의제목과비교 & 입력한단어가포함된모든도서의정보를출력한다.
 		String newtitle;
-		int ch=0;
 		do{
 			System.out.println("*******************************************************************");
 			System.out.print("제목:");
 			newtitle = scan.next();
 
-			ch = newtitle.toCharArray()[0];
 			if(bookcollect.getequal2(newtitle)==1){      
-				a=1;
+				a=1; //검색결과 가있음
 				bookcollect.print(newtitle);
 				System.out.println("*******************************************************************");
 			}
-			else{
+			else{ //검색어와일치하는 결과가없음
 				a=2;
-
 			}
-
 		}while(a ==0);
-
-
+		
 		if(a==1){
 			System.out.println("검색한단어를포함한모든책이검색되었습니다!");
 			System.out.println("*******************************************************************");
 			student_menu(loginmem);
-
 		}
 		else if(a==2){
 			System.out.println("검색어와일치하는결과가없습니다!");
 			System.out.println("*******************************************************************");
 			student_menu(loginmem);
-
 		}
-		//검색단어를입력하지않고Enter키누르는경우
-		//검색어를입력하지않았습니다. 다시입력해주십시오. 메시지출력
 	}
 	//도서 정보 명단의 대여자 중, 자신의 계정 아이디와 일치하는 도서들의 항목들을 출력시킨다.
 	public void book_borrowinfo(Member loginmem) throws Exception{

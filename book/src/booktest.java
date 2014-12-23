@@ -79,7 +79,7 @@ public class booktest {
 				if(ms.ID.equals("1123158") && ms.password.equals("00000000"))
 					assertTrue(true);
 			}
-			assertFalse(false);
+			assertTrue(false);
 		}catch(Exception e){
 		}
 	}
@@ -96,7 +96,7 @@ public class booktest {
 				if(ms.ID.equals("1214178"))
 					assertTrue(true);
 			}
-			assertFalse(false);
+			assertTrue(false);
 		}catch(Exception e){
 		}
 	}
@@ -104,40 +104,37 @@ public class booktest {
 	public void addmemtest() throws ClassNotFoundException, IOException{
 		Member newmem2 = new Member("1234123","1234123","김소공","컴퓨터과학과");
 		
-		membercollectm.addmem(newmem2); //저장하고자하는 newmem2은 addmem함수로 인해 membercollection.txt에 저장된다.
+		membercollectm.addmem(newmem2);
 		int endnum =0;
 		try{
 			@SuppressWarnings("resource")
 			ObjectInputStream osin = new ObjectInputStream(new FileInputStream("membercollection.txt"));
-			endnum = osin.readInt(); //총 저장된 member객체 수는 endnum, 마지막 newmem2은 endnum-1 인덱스를 가지고있는 객체일 것이다.
-			for(int i=0; i< endnum;i++){
+			endnum = osin.readInt(); 
+			for(int i=0; i< osin.readInt();i++){
 				Member ms = (Member)osin.readObject();
-				if((endnum-1) ==i){
-					if( ms.ID.equals("1234123")&& ms.password.equals("1234123") &&ms.name.equals("김소공")&& ms.major.equals("컴퓨터과학과"))
+				if((endnum-1) == i){
+					if( ms.ID.equals("1234123")&& ms.password.equals("1234123") && ms.name.equals("김소공")&& ms.major.equals("컴퓨터과학과"))
 						assertTrue(true);
 				}
 			}
-			assertFalse(false);
+			assertTrue(false);
 		}catch(Exception e){
 		}
 		assertEquals(endnum, membercollectm.memberCount); 
-		//membercollectm에 membercollection.txt에 있던 객체들과 추가한 객체(newmem2)가 포함되어졌다. 함께MemberCount도 수정되었다.
 		assertEquals("1234123", membercollectm.collectionm.elementAt(endnum-1).ID);
-		//membercollectionm의 endnum-1번째 객체의 id와 추가한 객체의 id가일치하는지 확인하였다.
 	}
 	@Test
 	public void getequalISBNtest() throws Exception{
 		bookcollectb.getequalISBN(1315);
 		try{
-			//테스트에서 만든 파일 열기
 			ObjectInputStream osi = new ObjectInputStream(new FileInputStream("bookcollectiontest.txt"));
 			bookcollectb.setBookCount(osi.readInt());
 			for( int i= 0; i< bookcollectb.getBookCount();i++){
 				Book bs = (Book)osi.readObject();
-				if(bs.ISBN==1315)
+				if(bs.ISBN == 1315)
 					assertTrue(true);
 			}
-			assertFalse(false);
+			assertTrue(false);
 		}catch(Exception e){
 		}
 	}
@@ -158,12 +155,12 @@ public class booktest {
 			bookcollectb.setBookCount(osb.readInt());
 			for( int i= 0; i< osb.readInt();i++){
 				Book bs = (Book)osb.readObject();
-				if(endnum==i){
+				if((endnum-1) == i){
 					if(bs.title.equals("비밀의정원") && bs.author.equals("조해너배스포드") && bs.publish.equals("퍼블리싱컴퍼니") && (bs.ISBN==6656) && bs.avail.equals("X") && bs.borrower.equals(""));
 					assertTrue(true);
 				}
 			}
-			assertFalse(false);
+			assertTrue(false);
 		}catch(Exception e){
 		}
 		assertEquals(endnum, bookcollectb.bookCount);
@@ -182,7 +179,7 @@ public class booktest {
 				if(bs.title.equals("원하고원하다"))
 					assertTrue(true);
 			}
-			assertFalse(false);
+			assertTrue(false);
 		}catch(Exception e){
 		}
 	}
@@ -200,14 +197,13 @@ public class booktest {
 				if(ms.borrower.equals("1315698")) //등록되어있지않는ID를 입력한 경우
 					assertTrue(true);
 			} 
-			assertFalse(false);
+			assertTrue(false);
 		}catch (Exception e) {
 
 		} 
 	}
 
-
-	@Test //존재하는 IBSN을 입력했을 경우 true값을 리턴하는지 확인하기
+	@Test 
 	public void search_ISBNtest(){
 
 		try{
@@ -224,15 +220,10 @@ public class booktest {
 					assertTrue(true);
 
 			}
-			assertFalse(false);
+			assertTrue(false);
 		} catch (Exception e) {
 		}   
-
-
 	}
-
-
-
 	@Test//존재하지않는 IBSN을 입력했을 경우 오류메세지가 출력하는지 확인하기
 	public void printtest(){
 
@@ -243,11 +234,10 @@ public class booktest {
 			bookcollectb.setBookCount(osib.readInt());
 			for( int i= 0; i< bookcollectb.getBookCount();i++){
 				Book ms = (Book)osib.readObject();
-
-				if(ms.ISBN == 1316) //존재하지않는 ISBN(1316)를 넣었을 경우
+				if(ms.ISBN != 1316) //존재하지않는 ISBN(1316)를 넣었을 경우
 					assertTrue(true);  
 			}
-			assertFalse(false);
+			assertTrue(false);
 		} catch (Exception e) {
 		}      
 
@@ -261,7 +251,7 @@ public class booktest {
 		if(result.equals(book2.toString()))
 			assertTrue(true);
 		else
-			assertFalse(false);
+			assertTrue(false);
 
 	}
 
@@ -276,7 +266,7 @@ public class booktest {
 			for( int i= 0; i< bookcollectb.getBookCount();i++){
 				Book bk = (Book)osi.readObject();
 				if(bk.title.equals("센트럴파크"))
-					assertFalse(false);
+					assertTrue(false);
 			}
 			assertTrue(true);
 		}catch(Exception e){
@@ -310,7 +300,7 @@ public class booktest {
 			for( int i= 0; i< endnnum;i++){
 				Book ms = (Book)osb.readObject();
 				if(bookcollectb.collectionb.elementAt(i).equals(ms) == true)
-					assertFalse(false);
+					assertTrue(false);
 			}
 			assertTrue(true);
 
