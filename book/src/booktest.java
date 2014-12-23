@@ -34,7 +34,6 @@ public class booktest {
 			mem3 = new Member("1412569","00000000","한경수","화학과");
 			mem4 = new Member("1215689","00000000","박하원","경영학과");
 			ObjectOutputStream osis = new ObjectOutputStream(new FileOutputStream("membercollectiontest.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
-			//membercollectm.collectionm.clear();
 			membercollectm.setMemberCount(5);
 			System.out.println(membercollectm.getMemberCount());
 			membercollectm.collectionm.add(mem0);
@@ -52,7 +51,6 @@ public class booktest {
 			book1 = new Book("센트럴파크" ,"기욤뮈소", "밝은세상" ,1478, "O" ,"1412569");
 			book2 = new Book("탄탄동사거리만복전파사" ,"김려령", "문학동네어린이", 1669,"O" ,"1215689");
 			ObjectOutputStream oob = new ObjectOutputStream(new FileOutputStream("bookcollectiontest.txt"));
-			//bookcollectb.collectionb.clear();
 			bookcollectb.setBookCount(3);
 			bookcollectb.collectionb.add(book0);
 			bookcollectb.collectionb.add(book1);
@@ -105,18 +103,16 @@ public class booktest {
 	@Test
 	public void addmemtest() throws ClassNotFoundException, IOException{
 		Member newmem2 = new Member("1234123","1234123","김소공","컴퓨터과학과");
-		int count = membercollectm.getMemberCount();
-		membercollectm.addmem(newmem2);
-		count++;
+		
+		membercollectm.addmem(newmem2); //저장하고자하는 newmem2은 addmem함수로 인해 membercollection.txt에 저장된다.
 		int endnum =0;
 		try{
 			@SuppressWarnings("resource")
-			ObjectInputStream osin = new ObjectInputStream(new FileInputStream("membercollection.txt"));///맨처음엔파일없으면 오류남, 파일없으면그냥지나가게하는거 소스추가
-			endnum = osin.readInt();
-			//membercollectm.setMemberCount(osi.readInt());
-			for(int i=0; i<osin.readInt();i++){
+			ObjectInputStream osin = new ObjectInputStream(new FileInputStream("membercollection.txt"));
+			endnum = osin.readInt(); //총 저장된 member객체 수는 endnum, 마지막 newmem2은 endnum-1 인덱스를 가지고있는 객체일 것이다.
+			for(int i=0; i< endnum;i++){
 				Member ms = (Member)osin.readObject();
-				if(endnum ==i){
+				if((endnum-1) ==i){
 					if( ms.ID.equals("1234123")&& ms.password.equals("1234123") &&ms.name.equals("김소공")&& ms.major.equals("컴퓨터과학과"))
 						assertTrue(true);
 				}
@@ -124,14 +120,14 @@ public class booktest {
 			assertFalse(false);
 		}catch(Exception e){
 		}
-		assertEquals(endnum, membercollectm.memberCount);
-		assertEquals("1234123", membercollectm.collectionm.elementAt(count).ID);
+		assertEquals(endnum, membercollectm.memberCount); 
+		//membercollectm에 membercollection.txt에 있던 객체들과 추가한 객체(newmem2)가 포함되어졌다. 함께MemberCount도 수정되었다.
+		assertEquals("1234123", membercollectm.collectionm.elementAt(endnum-1).ID);
+		//membercollectionm의 endnum-1번째 객체의 id와 추가한 객체의 id가일치하는지 확인하였다.
 	}
 	@Test
 	public void getequalISBNtest() throws Exception{
-		Book newbook1=new Book();
 		bookcollectb.getequalISBN(1315);
-
 		try{
 			//테스트에서 만든 파일 열기
 			ObjectInputStream osi = new ObjectInputStream(new FileInputStream("bookcollectiontest.txt"));
@@ -157,7 +153,6 @@ public class booktest {
 		try{
 			//테스트에서 만든 파일 열기
 			ObjectInputStream osb = new ObjectInputStream(new FileInputStream("bookcollection.txt"));
-
 			endnum=osb.readInt();
 			//추가한 책 있는지 확인
 			bookcollectb.setBookCount(osb.readInt());
@@ -171,14 +166,12 @@ public class booktest {
 			assertFalse(false);
 		}catch(Exception e){
 		}
-
 		assertEquals(endnum, bookcollectb.bookCount);
 	}
 	@Test
 	public void getequal2titletest() throws Exception{
 
 		bookcollectb.getequal2("원하고원하다");
-
 		try{
 			//테스트에서 만든 파일 열기
 			ObjectInputStream osi = new ObjectInputStream(new FileInputStream("bookcollectiontest.txt"));
@@ -196,8 +189,6 @@ public class booktest {
 
 	@Test
 	public void findmybooktest(){
-
-
 		try {
 			bookcollectb.findmybook("1315698");
 			@SuppressWarnings("resource")

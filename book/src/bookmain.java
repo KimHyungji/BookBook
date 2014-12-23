@@ -438,10 +438,6 @@ public class bookmain{
 				bookcollect.print(newtitle);
 				System.out.println("*******************************************************************");
 			}
-			else if(newtitle.length() == 0 && ch == 10) //13
-			{
-				System.out.println("검색어를입력하지않았습니다. 다시입력해주십시오.");
-			}
 			else{
 				a=2;
 
